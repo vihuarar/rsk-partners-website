@@ -1,0 +1,44 @@
+# Secrets / environment
+wp-config.php
+.htaccess
+*.env
+.env*
+
+# OS / editor noise
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+.idea/
+.vscode/
+
+# Logs
+*.log
+debug.log
+error_log
+wp-content/debug.log
+wp-content/uploads/wc-logs/
+
+# WordPress runtime / generated
+wp-content/uploads/
+wp-content/cache/
+wp-content/upgrade/
+wp-content/upgrade-temp-backup/
+wp-content/backup-db/
+wp-content/backups/
+wp-content/blogs.dir/
+
+# Drop-ins (host-specific; e.g. WP Engine / Breeze)
+wp-content/advanced-cache.php
+wp-content/object-cache.php
+wp-content/db.php
+wp-content/maintenance/
+
+# Wordfence
+wp-content/wflogs/
+wp-content/wfcache/
+
+# Bundled/legacy artifacts in this repo
+wp-content/mysql.sql
+wp-content/*.wpress
+wp-content/breeze-config/

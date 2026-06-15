@@ -1,0 +1,46 @@
+services:
+  db:
+    image: mysql:8.4
+    container_name: rsk_mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpass
+      MYSQL_DATABASE: wp_rskrealestate
+      MYSQL_USER: rskrealestate
+      MYSQL_PASSWORD: rFKzZnsUUb5IWYFqXKrT
+    command:
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_unicode_ci
+      - --max_allowed_packet=256M
+    volumes:
+      - db_data:/var/lib/mysql
+      - ./mysql-backups/wp_rskrealestate.sql:/docker-entrypoint-initdb.d/01-wp_rskrealestate.sql:ro
+    ports:
+      - "3307:3306"
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "127.0.0.1", "-uroot", "-prootpass"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+  wordpress:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: rsk_wordpress
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      WORDPRESS_DB_HOST: db:3306
+      WORDPRESS_DB_NAME: wp_rskrealestate
+      WORDPRESS_DB_USER: rskrealestate
+      WORDPRESS_DB_PASSWORD: rFKzZnsUUb5IWYFqXKrT
+    ports:
+      - "8080:80"
+    volumes:
+      - ./wordpress-site:/var/www/html
+
+volumes:
+  db_data:
