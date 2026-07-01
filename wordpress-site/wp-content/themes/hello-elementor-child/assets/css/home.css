@@ -1,0 +1,459 @@
+/* ============================================================
+   RSK Partners — Home page styles
+   Loaded only on the front page (see functions.php).
+   ============================================================ */
+
+:root {
+	--rsk-navy:        #0b2545;
+	--rsk-navy-deep:   #061a36;
+	--rsk-blue:        #1f4e8c;
+	--rsk-blue-soft:   #3d6db0;
+	--rsk-cream:       #f4efe6;
+	--rsk-bg:          #ffffff;
+	--rsk-ink:         #0e1a2b;
+	--rsk-ink-soft:    #4a5568;
+	--rsk-rule:        rgba(11, 37, 69, 0.12);
+
+	--rsk-serif:       "Playfair Display", Georgia, "Times New Roman", serif;
+	--rsk-sans:        "DM Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+
+	--rsk-container:   1180px;
+	--rsk-gap:         clamp(1rem, 2.5vw, 2.25rem);
+	--rsk-section-y:   clamp(3rem, 7vw, 6rem);
+}
+
+/* ---------- Base ---------- */
+.rsk-home,
+.rsk-home * { box-sizing: border-box; }
+
+.rsk-home {
+	color: var(--rsk-ink);
+	font-family: var(--rsk-sans);
+	line-height: 1.55;
+	background: var(--rsk-bg);
+}
+
+.rsk-home img { max-width: 100%; height: auto; display: block; }
+
+.rsk-container {
+	width: 100%;
+	max-width: var(--rsk-container);
+	margin: 0 auto;
+	padding: 0 clamp(1rem, 3vw, 2rem);
+}
+
+.rsk-italic {
+	font-family: var(--rsk-serif);
+	font-style: italic;
+	font-weight: 500;
+}
+
+.rsk-section { padding: var(--rsk-section-y) 0; }
+
+.rsk-section__title {
+	font-family: var(--rsk-serif);
+	font-size: clamp(2.25rem, 5vw, 3.75rem);
+	line-height: 1.05;
+	margin: 0 0 2rem;
+	color: var(--rsk-ink);
+}
+.rsk-section__title--center { text-align: center; }
+
+.rsk-grid { display: grid; gap: var(--rsk-gap); }
+.rsk-grid--2 { grid-template-columns: 1fr; }
+
+@media (min-width: 860px) {
+	.rsk-grid--2 { grid-template-columns: 1fr 1fr; align-items: center; }
+}
+
+/* ---------- Hero ---------- */
+.rsk-hero {
+	position: relative;
+	min-height: 92vh;
+	display: flex;
+	align-items: flex-start;
+	color: #fff;
+	background: var(--rsk-navy);
+	overflow: hidden;
+	isolation: isolate;
+}
+
+.rsk-hero__video {
+	position: absolute;
+	inset: 0;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	z-index: 1;
+	pointer-events: none;
+}
+
+.rsk-hero__overlay {
+	position: absolute;
+	inset: 0;
+	z-index: 2;
+	background:
+		linear-gradient(180deg,
+			rgba(0, 0, 0, 0.45) 0%,
+			rgba(11, 37, 69, 0.30) 40%,
+			rgba(0, 0, 0, 0.55) 100%);
+}
+
+.rsk-hero__inner {
+	position: relative;
+	z-index: 3;
+	max-width: 1480px;
+	margin: 0 auto;
+	width: 100%;
+	padding: clamp(5rem, 10vh, 8rem) clamp(1.25rem, 4vw, 3.5rem) clamp(2rem, 5vh, 4rem);
+	display: grid;
+	grid-template-columns: 1fr auto;
+	align-items: end;
+	gap: clamp(1.5rem, 3vw, 2.5rem);
+	min-height: inherit;
+}
+
+/* Slides container — stack via grid in same cell */
+.rsk-hero__slides {
+	grid-column: 1;
+	position: relative;
+	display: grid;
+}
+
+.rsk-hero__slide {
+	grid-column: 1;
+	grid-row: 1;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	gap: clamp(1.25rem, 2.5vw, 2rem);
+	opacity: 0;
+	visibility: hidden;
+	transform: translateY(8px);
+	transition:
+		opacity 0.55s ease,
+		transform 0.55s ease,
+		visibility 0s linear 0.55s;
+	pointer-events: none;
+}
+
+@media (min-width: 860px) {
+	.rsk-hero__slide {
+		flex-direction: row;
+		align-items: stretch;
+		gap: 0;
+	}
+}
+
+.rsk-hero__slide-content {
+	display: flex;
+	flex-direction: column;
+	gap: clamp(1.25rem, 2.5vw, 2rem);
+}
+
+.rsk-hero__slide.is-active {
+	opacity: 1;
+	visibility: visible;
+	transform: none;
+	transition:
+		opacity 0.55s ease,
+		transform 0.55s ease,
+		visibility 0s linear 0s;
+	pointer-events: auto;
+}
+
+/* Dots — vertical column on the right edge of the hero inner */
+.rsk-hero__dots {
+	grid-column: 2;
+	display: flex;
+	flex-direction: column;
+	gap: 0.85rem;
+	align-self: center;
+	justify-self: end;
+	margin-bottom: clamp(1rem, 3vh, 3rem);
+}
+
+.rsk-hero__dot {
+	width: 9px;
+	height: 9px;
+	border-radius: 50%;
+	border: 1px solid rgba(255, 255, 255, 0.85);
+	background: transparent;
+	padding: 0;
+	cursor: pointer;
+	transition: background 0.2s ease, transform 0.2s ease;
+}
+.rsk-hero__dot:hover { background: rgba(255, 255, 255, 0.5); }
+.rsk-hero__dot.is-active {
+	background: #fff;
+	transform: scale(1.15);
+}
+.rsk-hero__dot:focus-visible {
+	outline: 2px solid rgba(255, 255, 255, 0.6);
+	outline-offset: 4px;
+}
+
+.rsk-hero__title {
+	font-family: var(--rsk-sans);
+	font-weight: 600;
+	font-size: clamp(2.25rem, 5.4vw, 5rem);
+	line-height: 1.02;
+	letter-spacing: -0.01em;
+	margin: 0;
+	text-transform: uppercase;
+	color: #fff;
+	text-shadow:
+		0 1px 2px rgba(0, 0, 0, 0.55),
+		0 4px 16px rgba(0, 0, 0, 0.5),
+		0 8px 40px rgba(0, 0, 0, 0.35);
+}
+
+
+.rsk-hero__accent {
+	font-weight: 600;
+	color: #fff;
+}
+
+/* Vertical white line — hidden on mobile, left accent beside title on desktop */
+.rsk-hero__vline {
+	display: none;
+}
+@media (min-width: 860px) {
+	.rsk-hero__vline {
+		display: block;
+		flex: 0 0 1px;
+		align-self: stretch;
+		background: rgba(255, 255, 255, 0.45);
+		margin-right: clamp(1.25rem, 2vw, 2rem);
+	}
+}
+
+/* Hero intro (icon + body) — always stacked below the title */
+.rsk-hero__intro {
+	display: flex;
+	gap: 1rem;
+	align-items: flex-start;
+}
+
+.rsk-hero__body {
+	max-width: 38rem;
+}
+
+.rsk-hero__cta-dot {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 2.25rem;
+	height: 2.25rem;
+	border-radius: 50%;
+	background: #c25e57;
+	color: #fff;
+	flex-shrink: 0;
+	text-decoration: none;
+	transition: background 0.2s ease, transform 0.2s ease;
+}
+.rsk-hero__cta-dot:hover { background: #d36e66; transform: translateX(2px); }
+.rsk-hero__cta-dot svg { width: 1.05rem; height: 1.05rem; display: block; }
+
+.rsk-hero__body {
+	margin: 0;
+	color: rgba(255, 255, 255, 0.96);
+	font-family: var(--rsk-sans);
+	font-weight: 400;
+	font-size: clamp(0.8rem, 0.95vw, 0.95rem);
+	line-height: 1.55;
+	text-shadow:
+		0 1px 2px rgba(0, 0, 0, 0.6),
+		0 2px 10px rgba(0, 0, 0, 0.5);
+}
+.rsk-hero__body strong { font-weight: 600; }
+
+/* Respect users who don't want motion */
+@media (prefers-reduced-motion: reduce) {
+	.rsk-hero__video { display: none; }
+	.rsk-hero {
+		background:
+			linear-gradient(rgba(11, 37, 69, 0.6), rgba(11, 37, 69, 0.6)),
+			var(--rsk-navy);
+	}
+}
+
+/* ---------- Who We Are ---------- */
+.rsk-who { background: #fff; }
+
+.rsk-who__grid {
+	display: grid;
+	gap: clamp(1.5rem, 3vw, 2.5rem);
+	grid-template-columns: 1fr;
+	grid-template-areas:
+		"heading"
+		"media"
+		"panel";
+}
+
+@media (min-width: 900px) {
+	.rsk-who__grid {
+		grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
+		grid-template-areas:
+			"heading panel"
+			"media   panel";
+		align-items: start;
+	}
+}
+
+.rsk-who__heading { grid-area: heading; margin: 0; }
+.rsk-who__heading h2 {
+	font-family: var(--rsk-serif);
+	font-size: clamp(2.5rem, 6vw, 4.75rem);
+	line-height: 1;
+	margin: 0;
+	color: var(--rsk-navy);
+	font-weight: 400;
+	font-style: normal;
+}
+.rsk-who__heading h2 > span:last-child {
+	display: inline-block;
+	margin-left: clamp(1rem, 4vw, 3rem);
+}
+
+/* Media (image + vertical label) — keeps natural aspect, anchored to bottom so it lines
+   up with the bottom edge of the panel on the right regardless of accordion content height */
+.rsk-who__media {
+	grid-area: media;
+	position: relative;
+	margin: 0;
+	padding-left: 2.25rem;
+	align-self: end;
+}
+.rsk-who__media img,
+.rsk-who__media video {
+	display: block;
+	width: 100%;
+	height: auto;
+}
+.rsk-who__label {
+	position: absolute;
+	left: 0;
+	top: 0;
+	bottom: 0;
+	width: 2.25rem;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	writing-mode: vertical-rl;
+	transform: rotate(180deg);
+	font-size: 0.7rem;
+	letter-spacing: 0.32em;
+	color: var(--rsk-navy);
+	font-weight: 600;
+	text-transform: uppercase;
+}
+
+/* Who We Are right panel — styles live in Tailwind utilities on the markup.
+   The .rsk-who__panel, .rsk-acc, .rsk-acc__toggle, and .is-active class names
+   are kept as JS hooks (see assets/js/home.js) but carry no CSS. */
+.rsk-who__panel { grid-area: panel; }
+
+/* ---------- Cards ---------- */
+.rsk-cards--stack { display: grid; gap: 0.75rem; }
+.rsk-cards--row {
+	display: grid;
+	gap: var(--rsk-gap);
+	grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+.rsk-cards--4 { grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); }
+
+.rsk-card {
+	padding: 1.25rem 1.5rem;
+	border-radius: 4px;
+	background: #fff;
+	border: 1px solid var(--rsk-rule);
+}
+.rsk-card h3 {
+	margin: 0;
+	font-family: var(--rsk-serif);
+	font-weight: 500;
+	font-size: 1.15rem;
+}
+
+.rsk-card--dark {
+	background: var(--rsk-navy);
+	color: #fff;
+	border-color: transparent;
+}
+
+.rsk-card--img {
+	margin: 0;
+	overflow: hidden;
+	padding: 0;
+	border: 0;
+	background: transparent;
+}
+.rsk-card--img img {
+	width: 100%;
+	aspect-ratio: 4/3;
+	object-fit: cover;
+}
+.rsk-card--img figcaption {
+	padding: 0.75rem 0 0;
+	font-size: 0.9rem;
+	color: var(--rsk-ink-soft);
+}
+
+.rsk-card--market {
+	background: var(--rsk-blue);
+	color: #fff;
+	border-color: transparent;
+	text-align: center;
+	padding: 1.75rem 1rem;
+}
+.rsk-card--market-active {
+	background: var(--rsk-navy-deep);
+	outline: 2px solid #fff;
+	outline-offset: -6px;
+}
+
+/* ---------- What We Do ---------- */
+.rsk-what { background: #fff; }
+
+/* ---------- Product ---------- */
+/* Section rebuilt in Tailwind — no hand-rolled CSS needed. */
+
+/* ---------- 555 Initiative ---------- */
+/* Section rebuilt in Tailwind — no hand-rolled CSS needed. */
+
+/* ---------- Markets ---------- */
+.rsk-markets { background: var(--rsk-blue); color: #fff; }
+.rsk-markets .rsk-section__title { color: #fff; }
+
+/* ---------- Contact ---------- */
+.rsk-contact { background: var(--rsk-navy); color: #fff; }
+.rsk-contact__copy h2 {
+	font-family: var(--rsk-serif);
+	font-size: clamp(2rem, 4vw, 3rem);
+	margin: 0 0 0.25rem;
+}
+.rsk-contact__copy h3 {
+	font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+	margin: 0 0 1.25rem;
+	color: #c9d6ec;
+}
+.rsk-contact__copy p { max-width: 38ch; color: #d8e3f5; }
+
+.rsk-btn {
+	display: inline-block;
+	margin-top: 1.25rem;
+	padding: 0.85rem 1.6rem;
+	background: #fff;
+	color: var(--rsk-navy);
+	font-weight: 600;
+	letter-spacing: 0.04em;
+	text-transform: uppercase;
+	font-size: 0.85rem;
+	text-decoration: none;
+	border-radius: 2px;
+	transition: background 0.2s ease;
+}
+.rsk-btn:hover { background: var(--rsk-cream); }
+
+.rsk-contact__media img { border-radius: 4px; }

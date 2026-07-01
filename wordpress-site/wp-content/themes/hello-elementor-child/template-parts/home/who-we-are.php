@@ -1,0 +1,113 @@
+<?php
+/**
+ * Home — Who We Are section.
+ *
+ * @package HelloElementorChild
+ *
+ * @var array $args {
+ *     @type string $img   Assets/images URL.
+ *     @type string $video Assets/videos URL.
+ * }
+ */
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
+$img   = $args['img'];
+$video = $args['video'];
+
+$who_items = array(
+	array(
+		'num'      => '01',
+		'title'    => 'Strategic Growth',
+		'subtitle' => 'Housing in High-Growth Markets',
+		'body'     => '<strong>RSK Real Estate Partners</strong> is a vertically integrated real estate development company focused on delivering high-quality attainable housing in strategically selected high-growth markets across the United States.',
+	),
+	array(
+		'num'      => '02',
+		'title'    => 'Expert Execution',
+		'subtitle' => 'Built by Multidisciplinary Expertise',
+		'body'     => 'Our team combines decades of experience across acquisitions, construction, capital markets, and operations to deliver projects on time and on budget.',
+	),
+	array(
+		'num'      => '03',
+		'title'    => 'Smart Development',
+		'subtitle' => 'Data-Driven Real Estate',
+		'body'     => 'We use market intelligence and analytics to identify high-conviction opportunities and to engineer products that match real local demand.',
+	),
+	array(
+		'num'      => '04',
+		'title'    => '5|5|5 Vision',
+		'subtitle' => 'Scaling the Future of Housing',
+		'body'     => 'Five thousand homes, five markets, five years — a focused plan to close the gap between attainable housing demand and supply.',
+	),
+);
+?>
+<section class="rsk-section rsk-who">
+	<div class="rsk-container rsk-who__grid">
+		<header class="rsk-who__heading">
+			<h2>
+				<span>WHO</span><br>
+				<span>WE&nbsp;ARE</span>
+			</h2>
+		</header>
+
+		<figure class="rsk-who__media">
+			<span class="rsk-who__label" aria-hidden="true">RSK REAL ESTATE PARTNERS</span>
+			<video
+				class="rsk-who__video"
+				autoplay
+				muted
+				loop
+				playsinline
+				preload="auto"
+				poster="<?php echo esc_url( $img . '/who-interior.jpg' ); ?>"
+				aria-label="RSK Partners — Who we are"
+			>
+				<source src="<?php echo esc_url( $video . '/who-we-are-square.mp4' ); ?>" type="video/mp4">
+			</video>
+		</figure>
+
+		<div class="rsk-who__panel tw-flex tw-flex-col tw-bg-rsk-cream">
+			<?php foreach ( $who_items as $i => $item ) :
+				$is_active = ( 0 === $i );
+				$id        = 'rsk-who-' . $item['num'];
+			?>
+			<article
+				class="rsk-acc tw-group tw-grid tw-grid-cols-[clamp(4.5rem,7vw,6rem)_1fr] tw-items-stretch tw-bg-[#f1ece4] even:tw-bg-[#d2d4d6] tw-transition-colors<?php echo $is_active ? ' is-active' : ''; ?>"
+			>
+				<div
+					class="tw-bg-rsk-navy tw-text-white/90 tw-flex tw-items-center tw-justify-center tw-font-serif tw-italic tw-text-[clamp(1.6rem,2.4vw,2.25rem)] tw-leading-none tw-py-4 tw-tracking-wide tw-select-none"
+					aria-hidden="true"
+				>
+					<span class="tw-inline-block"><?php echo esc_html( $item['num'] ); ?></span><span class="tw-inline-block tw-ml-[-0.22em] tw-italic">/</span>
+				</div>
+
+				<div class="tw-flex tw-flex-col tw-items-center tw-px-[clamp(1.25rem,3vw,2.5rem)] tw-py-[clamp(1.25rem,2.4vw,1.85rem)] tw-text-center tw-text-rsk-ink">
+					<button
+						type="button"
+						class="rsk-acc__toggle tw-flex tw-flex-col tw-items-center tw-gap-1.5 tw-w-full !tw-bg-transparent hover:!tw-bg-transparent focus:!tw-bg-transparent active:!tw-bg-transparent tw-appearance-none tw-border-0 tw-text-inherit tw-text-center tw-cursor-pointer tw-p-0 tw-transition-opacity hover:tw-opacity-80 focus:tw-outline-none focus-visible:tw-outline focus-visible:tw-outline-2 focus-visible:tw-outline-rsk-blue focus-visible:tw-outline-offset-4 [-webkit-tap-highlight-color:transparent]"
+						aria-expanded="<?php echo $is_active ? 'true' : 'false'; ?>"
+						aria-controls="<?php echo esc_attr( $id ); ?>"
+					>
+						<span class="tw-font-serif tw-text-[clamp(1.6rem,2.6vw,2.4rem)] tw-leading-tight tw-text-rsk-navy"><?php echo esc_html( $item['title'] ); ?></span>
+						<span class="tw-font-sans tw-font-medium tw-text-[clamp(0.85rem,1vw,1rem)] tw-text-rsk-blue-soft tw-tracking-wide"><?php echo esc_html( $item['subtitle'] ); ?></span>
+					</button>
+
+					<div
+						id="<?php echo esc_attr( $id ); ?>"
+						class="tw-grid tw-grid-rows-[0fr] group-[.is-active]:tw-grid-rows-[1fr] tw-opacity-0 group-[.is-active]:tw-opacity-100 tw-transition-all tw-duration-500 tw-ease-out tw-w-full"
+					>
+						<div class="tw-overflow-hidden">
+							<div class="tw-pt-3 tw-max-w-[56ch] tw-mx-auto tw-font-sans tw-text-[clamp(0.9rem,1.05vw,1rem)] tw-leading-relaxed tw-text-rsk-ink">
+								<p class="tw-m-0 [&_strong]:tw-font-semibold"><?php echo $item['body']; ?></p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</article>
+			<?php endforeach; ?>
+		</div>
+	</div>
+</section>

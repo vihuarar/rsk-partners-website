@@ -88,6 +88,36 @@ docker exec -it rsk_wordpress bash
 docker exec -it rsk_mysql mysql -urskrealestate -p wp_rskrealestate
 ```
 
+## Theme development (child theme + Tailwind)
+
+The custom theme lives at `wordpress-site/wp-content/themes/hello-elementor-child/` and ships with a **Tailwind CLI** build pipeline. Full docs are in `wordpress-site/wp-content/themes/hello-elementor-child/SETUP.md` — quick version below.
+
+### One-time install
+
+```bash
+cd wordpress-site/wp-content/themes/hello-elementor-child
+npm install
+```
+
+### Daily dev loop — leave this running
+
+```bash
+cd wordpress-site/wp-content/themes/hello-elementor-child
+npm run watch:css
+```
+
+Watches every PHP file and rebuilds `assets/css/tailwind.css` in ~300ms on save. The file is enqueued with `filemtime()` cache-busting, so a normal browser reload (`Cmd+R`) picks up the change — no need to re-run any build command.
+
+If the browser still shows stale CSS after a save, that's almost always the **Breeze** plugin cache. Top admin bar → **Breeze → Purge All Cache**.
+
+### One-shot production build
+
+```bash
+npm run build:css
+```
+
+Run this before committing if `tailwind.css` is checked in (it currently is — see `.gitignore` in the theme folder; `node_modules/` is ignored but the compiled CSS is committed so prod doesn't need Node).
+
 ## Refreshing the database
 
 To re-seed MySQL from a new dump:
