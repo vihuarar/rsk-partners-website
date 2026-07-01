@@ -79,4 +79,46 @@
 			}
 		});
 	});
+
+	/* ---------- Parallax on What-We-Do product images ---------- */
+	const parallaxFigures = document.querySelectorAll('[data-rsk-reveal] figure.rsk-reveal--rise-image');
+	const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+	const canHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+	if (parallaxFigures.length && !reduceMotion && canHover) {
+		parallaxFigures.forEach(function (fig) {
+			const frame = fig.querySelector('.rsk-parallax__frame');
+			const media = frame && frame.querySelector('img, video');
+			if (!frame || !media) return;
+			media.classList.add('rsk-parallax__media');
+
+			frame.addEventListener('mousemove', function (e) {
+				const r = frame.getBoundingClientRect();
+				const x = ((e.clientX - r.left) / r.width) * 100;
+				const y = ((e.clientY - r.top) / r.height) * 100;
+				media.style.transformOrigin = x + '% ' + y + '%';
+			});
+
+			frame.addEventListener('mouseenter', function () {
+				fig.classList.add('is-hovering');
+			});
+
+			frame.addEventListener('mouseleave', function () {
+				fig.classList.remove('is-hovering');
+				media.style.transformOrigin = '50% 50%';
+			});
+		});
+	}
+
+	/* ---------- Scroll-reveal (re-triggers each time) ---------- */
+	const reveals = document.querySelectorAll('.rsk-reveal');
+	if (reveals.length && 'IntersectionObserver' in window) {
+		const io = new IntersectionObserver(function (entries) {
+			entries.forEach(function (entry) {
+				entry.target.classList.toggle('is-visible', entry.isIntersecting);
+			});
+		}, { threshold: 0.15, rootMargin: '0px 0px -8% 0px' });
+		reveals.forEach(function (el) { io.observe(el); });
+	} else {
+		reveals.forEach(function (el) { el.classList.add('is-visible'); });
+	}
 })();
