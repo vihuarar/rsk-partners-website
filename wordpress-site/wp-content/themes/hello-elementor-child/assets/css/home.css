@@ -488,6 +488,32 @@
 
 .rsk-contact__media img { border-radius: 4px; }
 
+/* ---------- Footer: white bands behind bottom menu and copyright ---------- */
+/* The footer section is a single Elementor column with dark blue bg.
+   Give the bottom nav-menu widget and the copyright text-editor widget
+   their own edge-to-edge white bands using clip-path bleed. */
+.elementor-location-footer .elementor-element-e6405c5,
+.elementor-location-footer .elementor-element-237b1bd {
+	position: relative;
+	background: #fff;
+	color: #22406c;
+	padding-top: clamp(1rem, 1.5vw, 1.5rem);
+	padding-bottom: clamp(1rem, 1.5vw, 1.5rem);
+	/* Bleed the background across the full viewport width */
+	box-shadow: 0 0 0 100vmax #fff;
+	clip-path: inset(0 -100vmax);
+}
+.elementor-location-footer .elementor-element-e6405c5 .elementor-nav-menu a,
+.elementor-location-footer .elementor-element-e6405c5 .elementor-item,
+.elementor-location-footer .elementor-element-237b1bd,
+.elementor-location-footer .elementor-element-237b1bd p {
+	color: #22406c !important;
+}
+.elementor-location-footer .elementor-element-e6405c5 .elementor-item:hover,
+.elementor-location-footer .elementor-element-e6405c5 .elementor-item:focus {
+	color: #143c82 !important;
+}
+
 /* ---------- Scroll-reveal effects ---------- */
 .rsk-reveal {
 	--rsk-reveal-delay: 0ms;
