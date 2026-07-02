@@ -44,18 +44,18 @@ $who_items = array(
 	),
 );
 ?>
-<section class="rsk-section rsk-who">
+<section class="rsk-section rsk-who" data-rsk-reveal>
 	<div class="rsk-container rsk-who__grid">
-		<header class="rsk-who__heading">
+		<header class="rsk-who__heading rsk-reveal rsk-reveal--rise">
 			<h2>
 				<span>WHO</span><br>
 				<span>WE&nbsp;ARE</span>
 			</h2>
 		</header>
 
-		<figure class="rsk-who__media">
+		<figure class="rsk-who__media rsk-reveal rsk-reveal--rise-image" style="--rsk-reveal-delay:180ms">
 			<div class="rsk-who__side" aria-hidden="true">
-				<span class="rsk-who__rule"></span>
+				<span class="rsk-who__rule rsk-who__rule--reveal"></span>
 				<span class="rsk-who__label">RSK REAL ESTATE PARTNERS</span>
 			</div>
 			<video

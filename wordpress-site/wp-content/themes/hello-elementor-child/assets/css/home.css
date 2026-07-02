@@ -514,6 +514,33 @@
 	transform: translate3d(0, 32px, 0) scale(0.98);
 }
 
+/* Accordion cards — slide in from the right, echoing the panel edge */
+.rsk-reveal--slide-right {
+	transform: translate3d(32px, 0, 0);
+}
+
+/* Vertical rule — grows from the bottom up toward the top */
+.rsk-who__rule--reveal {
+	transform-origin: bottom center;
+	transform: scaleY(0);
+	transition: transform 900ms cubic-bezier(0.22, 1, 0.36, 1) 400ms;
+	will-change: transform;
+}
+[data-rsk-reveal].is-visible .rsk-who__rule--reveal,
+.rsk-who .rsk-reveal.is-visible ~ * .rsk-who__rule--reveal {
+	transform: scaleY(1);
+}
+/* Simpler: use the figure's own reveal state to drive the rule */
+.rsk-who__media.is-visible .rsk-who__rule--reveal {
+	transform: scaleY(1);
+}
+@media (prefers-reduced-motion: reduce) {
+	.rsk-who__rule--reveal {
+		transform: none;
+		transition: none;
+	}
+}
+
 .rsk-reveal.is-visible {
 	opacity: 1;
 	transform: none;
