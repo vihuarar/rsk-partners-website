@@ -16,18 +16,19 @@ if ( ! defined( 'ABSPATH' ) ) {
 $img = $args['img'];
 
 $initiative_stats = array(
-	array( 'num' => '5K', 'label' => 'UNITS' ),
-	array( 'num' => '5',  'label' => 'CITIES' ),
-	array( 'num' => '5',  'label' => 'YEARS' ),
+	array( 'num' => '5K', 'label' => 'UNITS',  'nudge_x' => '-40%' ),
+	array( 'num' => '5',  'label' => 'CITIES', 'nudge_x' => '-50%' ),
+	array( 'num' => '5',  'label' => 'YEARS',  'nudge_x' => '-50%' ),
 );
 ?>
-<section class="tw-relative tw-left-1/2 tw-right-1/2 -tw-mx-[50vw] tw-w-screen tw-overflow-hidden">
+<section class="rsk-initiative tw-relative tw-left-1/2 tw-right-1/2 -tw-mx-[50vw] tw-w-screen tw-overflow-hidden tw-bg-[#0e2953] tw-pb-[clamp(4rem,10vw,8rem)] [clip-path:polygon(0_0,100%_0,100%_calc(100%-clamp(3rem,8vw,7rem)),0_100%)]" data-rsk-reveal>
 	<img
-		class="tw-absolute tw-inset-0 tw-w-full tw-h-full tw-object-cover tw-object-center"
+		class="!tw-absolute tw-inset-0 !tw-w-full !tw-h-full !tw-max-w-none tw-object-cover tw-object-center"
 		src="<?php echo esc_url( $img . '/fondo-rsk.png' ); ?>"
 		alt=""
 		aria-hidden="true"
 	>
+	<div class="tw-absolute tw-inset-0 tw-bg-[#0e2953]/45" aria-hidden="true"></div>
 
 	<div class="tw-relative tw-max-w-rsk-wide tw-mx-auto tw-px-[clamp(1.25rem,4vw,3.5rem)] tw-py-[clamp(3.5rem,9vh,7rem)]">
 		<div class="tw-flex tw-flex-col md:tw-flex-row tw-items-center tw-gap-[clamp(2rem,5vw,4rem)]">
@@ -39,15 +40,18 @@ $initiative_stats = array(
 					INITIATIVE
 				</h2>
 
-				<div class="tw-flex tw-gap-[clamp(1.25rem,2.5vw,2.25rem)] tw-flex-wrap">
+				<div class="tw-flex tw-items-end tw-gap-[clamp(1.25rem,2.5vw,2.25rem)] tw-flex-wrap">
 					<?php foreach ( $initiative_stats as $stat ) : ?>
-					<div class="tw-flex tw-flex-col tw-items-center tw-gap-3">
-						<div class="tw-w-[clamp(88px,10vw,124px)] tw-h-[clamp(88px,10vw,124px)] tw-rounded-full tw-border tw-border-white/55 tw-flex tw-items-center tw-justify-center">
-							<span class="tw-font-serif tw-text-white tw-text-[clamp(1.65rem,3.2vw,2.75rem)] tw-leading-none">
+					<div class="tw-flex tw-flex-col tw-items-center tw-gap-3 tw-shrink-0">
+						<div class="tw-w-[clamp(92px,10vw,124px)] tw-h-[clamp(92px,10vw,124px)] tw-shrink-0 tw-aspect-square tw-rounded-full !tw-border-2 !tw-border-solid !tw-border-white tw-flex tw-items-center tw-justify-center">
+							<span
+								class="tw-font-serif tw-text-white tw-text-[clamp(2rem,3.6vw,3.15rem)] tw-font-normal tw-inline-block"
+								style="line-height:1; font-variant-numeric: lining-nums; font-feature-settings: 'lnum'; -webkit-font-feature-settings: 'lnum';"
+							>
 								<?php echo esc_html( $stat['num'] ); ?>
 							</span>
 						</div>
-						<span class="tw-font-sans tw-text-white/65 tw-text-[0.68rem] tw-tracking-[0.28em] tw-uppercase tw-font-medium">
+						<span class="tw-font-sans tw-text-white tw-text-[0.72rem] tw-tracking-[0.3em] tw-uppercase tw-font-semibold">
 							<?php echo esc_html( $stat['label'] ); ?>
 						</span>
 					</div>

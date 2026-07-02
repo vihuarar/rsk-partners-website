@@ -12,7 +12,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 $markets = array( 'Dallas', 'Houston', 'Phoenix', 'Tampa' );
 $active  = 'Houston';
 ?>
-<section class="tw-bg-rsk-blue tw-text-white tw-py-20 md:tw-py-24">
+<section class="tw-relative tw-bg-[#141414] tw-text-white tw-py-20 md:tw-py-24 -tw-mt-[clamp(3rem,8vw,7rem)] tw-z-10 [clip-path:polygon(0_clamp(3rem,8vw,7rem),100%_0,100%_100%,0_100%)]">
 	<div class="tw-max-w-rsk tw-mx-auto tw-px-6">
 		<h2 class="tw-font-serif tw-text-center tw-text-4xl md:tw-text-5xl tw-leading-tight tw-mb-12">
 			Strategically Positioned in<br>
