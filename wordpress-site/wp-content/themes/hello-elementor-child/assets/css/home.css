@@ -323,25 +323,44 @@
 	position: relative;
 	margin: 0;
 	padding-left: 2.25rem;
-	align-self: end;
+	align-self: stretch;
+	display: flex;
+	flex-direction: column;
+	min-height: 0;
 }
 .rsk-who__media img,
 .rsk-who__media video {
 	display: block;
 	width: 100%;
-	height: auto;
+	height: 100%;
+	flex: 1 1 auto;
+	object-fit: cover;
+	min-height: 0;
 }
-.rsk-who__label {
+.rsk-who__side {
 	position: absolute;
 	left: 0;
 	top: 0;
 	bottom: 0;
 	width: 2.25rem;
 	display: flex;
+	flex-direction: column;
 	align-items: center;
-	justify-content: center;
+	justify-content: flex-end;
+	gap: 1rem;
+	padding-block: 0.75rem;
+}
+.rsk-who__rule {
+	width: 1px;
+	flex: 1 1 0;
+	min-height: 2rem;
+	background: var(--rsk-navy);
+}
+.rsk-who__label {
 	writing-mode: vertical-rl;
 	transform: rotate(180deg);
+	white-space: nowrap;
+	flex: 0 0 auto;
 	font-size: 0.7rem;
 	letter-spacing: 0.32em;
 	color: var(--rsk-navy);
@@ -352,7 +371,11 @@
 /* Who We Are right panel — styles live in Tailwind utilities on the markup.
    The .rsk-who__panel, .rsk-acc, .rsk-acc__toggle, and .is-active class names
    are kept as JS hooks (see assets/js/home.js) but carry no CSS. */
-.rsk-who__panel { grid-area: panel; }
+.rsk-who__panel {
+	grid-area: panel;
+	align-self: stretch;
+	min-height: 100%;
+}
 
 /* ---------- Cards ---------- */
 .rsk-cards--stack { display: grid; gap: 0.75rem; }

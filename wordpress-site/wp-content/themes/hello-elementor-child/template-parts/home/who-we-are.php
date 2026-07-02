@@ -54,7 +54,10 @@ $who_items = array(
 		</header>
 
 		<figure class="rsk-who__media">
-			<span class="rsk-who__label" aria-hidden="true">RSK REAL ESTATE PARTNERS</span>
+			<div class="rsk-who__side" aria-hidden="true">
+				<span class="rsk-who__rule"></span>
+				<span class="rsk-who__label">RSK REAL ESTATE PARTNERS</span>
+			</div>
 			<video
 				class="rsk-who__video"
 				autoplay
@@ -75,7 +78,7 @@ $who_items = array(
 				$id        = 'rsk-who-' . $item['num'];
 			?>
 			<article
-				class="rsk-acc tw-group tw-grid tw-grid-cols-[clamp(4.5rem,7vw,6rem)_1fr] tw-items-stretch tw-bg-[#f1ece4] even:tw-bg-[#d2d4d6] tw-transition-colors<?php echo $is_active ? ' is-active' : ''; ?>"
+				class="rsk-acc tw-group tw-grid tw-grid-cols-[clamp(4.5rem,7vw,6rem)_1fr] tw-items-stretch tw-flex-1 tw-basis-0 tw-bg-[#f1ece4] even:tw-bg-[#d2d4d6] tw-transition-colors<?php echo $is_active ? ' is-active' : ''; ?>"
 			>
 				<div
 					class="tw-bg-rsk-navy tw-text-white/90 tw-flex tw-items-center tw-justify-center tw-font-serif tw-italic tw-text-[clamp(1.6rem,2.4vw,2.25rem)] tw-leading-none tw-py-4 tw-tracking-wide tw-select-none"
