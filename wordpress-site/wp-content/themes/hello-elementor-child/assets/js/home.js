@@ -109,6 +109,149 @@
 		});
 	}
 
+	/* ---------- City carousel (Markets) — sliding infinite ---------- */
+	const citiesRoot = document.querySelector('[data-rsk-cities]');
+	if (citiesRoot) {
+		const track = citiesRoot.querySelector('.rsk-cities__track');
+		const interval = parseInt(citiesRoot.getAttribute('data-interval'), 10) || 3000;
+		const activeIndex = parseInt(citiesRoot.getAttribute('data-active-index'), 10) || 2;
+		const slideDuration = 700;
+		let timer = null;
+		let sliding = false;
+
+		function trackGap() {
+			return parseFloat(getComputedStyle(track).columnGap || getComputedStyle(track).gap) || 0;
+		}
+
+		function markActive() {
+			const cards = Array.from(track.children);
+			cards.forEach((c, i) => {
+				c.classList.toggle('is-active', i === activeIndex);
+			});
+			const centerCard = cards[activeIndex];
+			if (centerCard) {
+				centerCard.classList.add('is-changing');
+				setTimeout(() => centerCard.classList.remove('is-changing'), slideDuration + 250);
+			}
+		}
+
+		function slideLeft() {
+			if (sliding) return;
+			const first = track.firstElementChild;
+			if (!first) return;
+			sliding = true;
+
+			const stepDist = first.offsetWidth + trackGap();
+			const clone = first.cloneNode(true);
+			clone.classList.remove('is-active', 'is-changing');
+			track.appendChild(clone);
+
+			void track.offsetWidth;
+
+			track.style.transition = `transform ${slideDuration}ms cubic-bezier(0.22, 1, 0.36, 1)`;
+			track.style.transform = `translateX(-${stepDist}px)`;
+
+			const finish = () => {
+				track.removeEventListener('transitionend', finish);
+				track.style.transition = 'none';
+				track.style.transform = 'translateX(0)';
+				if (track.firstElementChild) track.firstElementChild.remove();
+				void track.offsetWidth;
+				markActive();
+				sliding = false;
+			};
+			track.addEventListener('transitionend', finish, { once: true });
+		}
+
+		function slideRight() {
+			if (sliding) return;
+			const last = track.lastElementChild;
+			if (!last) return;
+			sliding = true;
+
+			const stepDist = last.offsetWidth + trackGap();
+			const clone = last.cloneNode(true);
+			clone.classList.remove('is-active', 'is-changing');
+			track.insertBefore(clone, track.firstElementChild);
+
+			// Immediately offset track left by stepDist so the visual state matches pre-slide.
+			track.style.transition = 'none';
+			track.style.transform = `translateX(-${stepDist}px)`;
+			void track.offsetWidth;
+
+			// Now animate back to 0 — the prepended clone slides in from the left.
+			track.style.transition = `transform ${slideDuration}ms cubic-bezier(0.22, 1, 0.36, 1)`;
+			track.style.transform = 'translateX(0)';
+
+			const finish = () => {
+				track.removeEventListener('transitionend', finish);
+				track.style.transition = 'none';
+				if (track.lastElementChild) track.lastElementChild.remove();
+				void track.offsetWidth;
+				markActive();
+				sliding = false;
+			};
+			track.addEventListener('transitionend', finish, { once: true });
+		}
+
+		function step() { slideLeft(); }
+
+		let resumeTimer = null;
+		function scheduleResume(delay) {
+			if (resumeTimer) clearTimeout(resumeTimer);
+			resumeTimer = setTimeout(() => {
+				resumeTimer = null;
+				start();
+			}, delay);
+		}
+
+		function handleCardClick(e) {
+			const card = e.target.closest('.rsk-cities__card');
+			if (!card) return;
+			const cards = Array.from(track.children);
+			const clickedIndex = cards.indexOf(card);
+			if (clickedIndex < 0) return;
+
+			// Always reset both the running interval and any pending resume timer.
+			stop();
+			if (resumeTimer) { clearTimeout(resumeTimer); resumeTimer = null; }
+
+			// Clicking the active card (or clicking mid-slide) just resets the auto-timer.
+			if (sliding || clickedIndex === activeIndex) {
+				scheduleResume(interval);
+				return;
+			}
+
+			if (clickedIndex > activeIndex) {
+				slideLeft();
+			} else {
+				slideRight();
+			}
+			// Give the user a full interval to view the new center card before auto-advancing.
+			scheduleResume(slideDuration + interval);
+		}
+
+		track.addEventListener('click', handleCardClick);
+
+		function start() {
+			stop();
+			timer = setInterval(step, interval);
+		}
+		function stop() {
+			if (timer) { clearInterval(timer); timer = null; }
+			if (resumeTimer) { clearTimeout(resumeTimer); resumeTimer = null; }
+		}
+
+		document.addEventListener('visibilitychange', () => {
+			if (document.hidden) stop(); else start();
+		});
+		citiesRoot.addEventListener('mouseenter', stop);
+		citiesRoot.addEventListener('mouseleave', start);
+
+		markActive();
+		start();
+	}
+
 	/* ---------- Scroll-reveal (re-triggers each time) ---------- */
 	const reveals = document.querySelectorAll('.rsk-reveal');
 	if (reveals.length && 'IntersectionObserver' in window) {

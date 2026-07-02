@@ -64,15 +64,6 @@ $hero_slides = array(
 					</h1>
 
 					<div class="rsk-hero__intro">
-						<a
-							href="#portfolio"
-							class="rsk-hero__cta-dot"
-							aria-label="View current portfolio"
-						>
-							<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-								<path d="M5 12h12M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
-							</svg>
-						</a>
 						<p class="rsk-hero__body">
 							<?php echo $slide['body_html']; ?>
 						</p>
