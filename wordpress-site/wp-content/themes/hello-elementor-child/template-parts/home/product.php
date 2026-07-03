@@ -22,15 +22,15 @@ $product_gallery = array(
 $product_cols = array(
 	array(
 		'num'  => '01',
-		'body' => "RSK's product strategy is centered around delivering thoughtfully designed housing that balances quality, functionality, durability, and affordability.",
+		'body' => 'Great housing creates better outcomes for everyone involved. Our communities incorporate features and finishes typically found in higher-priced developments while maintaining disciplined construction costs.',
 	),
 	array(
 		'num'  => '02',
-		'body' => "Our communities are intentionally designed to meet the evolving needs of middle-income residents seeking attainable ownership and rental opportunities in rapidly growing markets.",
+		'body' => 'This approach results in higher rents, faster lease-up, lower turnover, lower concessions, and stronger resident satisfaction across every market we build in.',
 	),
 	array(
 		'num'  => '03',
-		'body' => "Through scalable construction systems, disciplined procurement strategies, and operational efficiency, we deliver housing that performs both financially and functionally.",
+		'body' => 'By designing around how people actually live, we create communities that outperform both operationally and financially — for residents and investors alike.',
 	),
 );
 ?>

@@ -19,8 +19,8 @@ $video = $args['video'];
 
 $hero_slides = array(
 	array(
-		'title_html' => 'BUILDING THE<br>FUTURE OF ATTAINABLE<br><span class="rsk-hero__accent">HOUSING</span>',
-		'body_html'  => '<strong>RSK Real Estate Partners</strong> develops high-quality residential communities through vertically integrated development, scalable execution, and data-driven market strategy.',
+		'title_html' => 'DISCIPLINED DEVELOPMENT.<br><span class="rsk-hero__accent">EXCEPTIONAL OUTCOMES.</span>',
+		'body_html'  => '<strong>RSK Real Estate Partners</strong> develops residential communities through a systematic approach to market selection, product design, construction, and operations&mdash;creating value for both residents and investors.',
 	),
 	array(
 		'title_html' => 'DESIGNED FOR GROWTH<br><span class="rsk-hero__accent">BUILT FOR SCALE</span>',

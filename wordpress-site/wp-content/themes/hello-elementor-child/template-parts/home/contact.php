@@ -33,10 +33,13 @@ $contact_socials = array(
 			<h2 class="tw-font-serif tw-font-normal tw-text-white tw-leading-[0.95] tw-tracking-tight tw-m-0 tw-text-[clamp(2.75rem,6.5vw,6rem)]">
 				Contact
 			</h2>
+			<p class="tw-mt-4 tw-max-w-[38ch] tw-font-sans tw-text-white/80 tw-text-[clamp(0.9rem,1vw,1.05rem)] tw-leading-relaxed">
+				Whether you&rsquo;re an investor, broker, landowner, future resident, or future team member, we&rsquo;d love to connect.
+			</p>
 
 			<div class="tw-mt-auto tw-grid tw-grid-cols-1 md:tw-grid-cols-[1fr_auto] tw-gap-x-[clamp(1.5rem,3vw,3rem)] tw-gap-y-8 tw-items-end tw-pt-[clamp(3rem,6vw,5rem)]">
 				<h3 class="tw-font-serif tw-font-normal tw-text-white tw-leading-[0.95] tw-tracking-tight tw-m-0 tw-text-[clamp(2.75rem,6.5vw,6rem)]">
-					Work<br>With&nbsp;Us
+					Partner<br>With&nbsp;Us
 				</h3>
 
 				<address class="tw-not-italic tw-font-sans tw-text-white/85 tw-text-[clamp(0.78rem,0.95vw,0.95rem)] tw-leading-[1.55] tw-space-y-4 tw-min-w-[16ch]">
@@ -73,9 +76,9 @@ $contact_socials = array(
 		</div>
 
 		<!-- RIGHT: image -->
-		<figure class="tw-relative tw-m-0 tw-min-h-[60vw] md:tw-min-h-0 tw-h-full">
+		<figure class="tw-relative tw-m-0 tw-h-full tw-min-h-[60vw] md:tw-min-h-0 tw-flex tw-items-stretch tw-justify-end tw-bg-[#224378] tw-overflow-hidden">
 			<img
-				class="!tw-absolute tw-inset-0 !tw-w-full !tw-h-full !tw-max-w-none tw-object-cover"
+				class="!tw-h-full !tw-w-auto !tw-max-w-none tw-block"
 				src="<?php echo esc_url( $img . '/contact-house.webp' ); ?>"
 				alt=""
 				loading="lazy"

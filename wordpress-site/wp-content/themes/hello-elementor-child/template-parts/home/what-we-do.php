@@ -18,9 +18,9 @@ $img   = $args['img'];
 $video = $args['video'];
 
 $what_paragraphs = array(
-	'<strong class="tw-font-semibold">RSK</strong> develops modern residential communities tailored to the growing demand for attainable housing.',
-	'By integrating development, construction oversight, operational systems, and market strategy under one platform, we are able to streamline execution, control costs, and accelerate delivery timelines without compromising quality.',
-	'We focus on high-growth markets where affordability challenges, population growth, and economic expansion continue to drive long-term housing demand.',
+	'<strong class="tw-font-semibold">RSK</strong> develops residential communities designed to create value for both residents and investors.',
+	'By integrating development, construction oversight, market intelligence, and operational systems under one platform, we deliver desirable housing that performs both financially and functionally.',
+	'We focus on high-growth markets where long-term demographic, economic, and housing fundamentals support durable demand.',
 );
 $what_products = array(
 	array(

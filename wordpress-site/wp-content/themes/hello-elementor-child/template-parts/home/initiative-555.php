@@ -63,10 +63,10 @@ $initiative_stats = array(
 
 			<div class="tw-flex-1 md:tw-max-w-[38ch]">
 				<p class="tw-m-0 tw-mb-5 tw-font-sans tw-text-white tw-text-[clamp(0.9rem,1.05vw,1rem)] tw-leading-relaxed tw-font-medium">
-					The 5|5|5 Initiative is RSK's long term commitment to scaling attainable housing across America's fastest-growing markets.
+					The 5|5|5 Initiative is our commitment to expanding attainable housing across America&rsquo;s fastest-growing markets.
 				</p>
 				<p class="tw-m-0 tw-font-sans tw-text-white/80 tw-text-[clamp(0.85rem,0.95vw,0.95rem)] tw-leading-relaxed">
-					This initiative represents more than growth targets — it reflects our belief that disciplined development, operational excellence, and innovative thinking can create meaningful impact at scale.
+					Every project, hire, process improvement, and investment decision supports this mission. Our goal is not simply growth — it is scalable impact.
 				</p>
 			</div>
 

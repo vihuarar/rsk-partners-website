@@ -20,27 +20,27 @@ $video = $args['video'];
 $who_items = array(
 	array(
 		'num'      => '01',
-		'title'    => 'Strategic Growth',
-		'subtitle' => 'Housing in High-Growth Markets',
-		'body'     => '<strong>RSK Real Estate Partners</strong> is a vertically integrated real estate development company focused on delivering high-quality attainable housing in strategically selected high-growth markets across the United States.',
+		'title'    => 'Data-Driven Site Selection',
+		'subtitle' => 'Long-term demand, identified early',
+		'body'     => 'We invest where long-term demographic, economic, and housing fundamentals support durable demand. Our research process evaluates population growth, employment trends, housing supply constraints, affordability metrics, and migration patterns to identify opportunities before they become obvious to the broader market.',
 	),
 	array(
 		'num'      => '02',
-		'title'    => 'Expert Execution',
-		'subtitle' => 'Built by Multidisciplinary Expertise',
-		'body'     => 'Our team combines decades of experience across acquisitions, construction, capital markets, and operations to deliver projects on time and on budget.',
+		'title'    => 'Operational Excellence',
+		'subtitle' => 'Execution is our competitive advantage',
+		'body'     => 'Through disciplined planning, standardized processes, and rigorous oversight, we streamline development, control costs, expedite timelines, and improve project outcomes without sacrificing quality.',
 	),
 	array(
 		'num'      => '03',
-		'title'    => 'Smart Development',
-		'subtitle' => 'Data-Driven Real Estate',
-		'body'     => 'We use market intelligence and analytics to identify high-conviction opportunities and to engineer products that match real local demand.',
+		'title'    => 'Systematic Development',
+		'subtitle' => 'Repeatable processes, not one-off decisions',
+		'body'     => 'We believe the best results come from repeatable processes, not one-off decisions. Every stage of development follows a structured framework designed to improve efficiency, reduce risk, and create consistency across every community we build.',
 	),
 	array(
 		'num'      => '04',
-		'title'    => '5|5|5 Vision',
-		'subtitle' => 'Scaling the Future of Housing',
-		'body'     => 'Five thousand homes, five markets, five years — a focused plan to close the gap between attainable housing demand and supply.',
+		'title'    => '5|5|5 Initiative',
+		'subtitle' => '5,000 Homes. 5 Markets. 5 Years.',
+		'body'     => 'The 5|5|5 Initiative is our commitment to expanding attainable housing across America&rsquo;s fastest-growing markets. Every project, hire, process improvement, and investment decision supports this mission. Our goal is not simply growth — it is scalable impact.',
 	),
 );
 ?>
@@ -78,7 +78,7 @@ $who_items = array(
 				$id        = 'rsk-who-' . $item['num'];
 			?>
 			<article
-				class="rsk-acc tw-group tw-grid tw-grid-cols-[clamp(4.5rem,7vw,6rem)_1fr] tw-items-stretch tw-flex-1 tw-basis-0 tw-bg-[#f1ece4] even:tw-bg-[#d2d4d6] tw-transition-colors<?php echo $is_active ? ' is-active' : ''; ?>"
+				class="rsk-acc tw-group tw-grid tw-grid-cols-[clamp(4.5rem,7vw,6rem)_minmax(0,1fr)] tw-items-stretch tw-flex-1 tw-basis-0 tw-bg-[#f1ece4] even:tw-bg-[#d2d4d6] tw-transition-colors<?php echo $is_active ? ' is-active' : ''; ?>"
 			>
 				<div
 					class="tw-bg-rsk-navy tw-text-white/90 tw-flex tw-items-center tw-justify-center tw-font-serif tw-italic tw-text-[clamp(1.6rem,2.4vw,2.25rem)] tw-leading-none tw-py-4 tw-tracking-wide tw-select-none"
