@@ -28,13 +28,13 @@ $markets_notes = array(
 	<div class="tw-max-w-rsk-wide tw-mx-auto tw-px-[clamp(1.5rem,4vw,4rem)]">
 		<div class="tw-grid tw-grid-cols-1 md:tw-grid-cols-[1.05fr_1fr] tw-gap-x-[clamp(2rem,5vw,5rem)] tw-gap-y-[clamp(2rem,4vw,3rem)] tw-items-center">
 
-			<h2 class="tw-font-serif tw-font-normal tw-text-[clamp(2.75rem,6vw,5.5rem)] tw-leading-[1.05] tw-tracking-tight tw-text-[#e9e6df] tw-m-0">
+			<h2 class="rsk-reveal rsk-reveal--rise tw-font-serif tw-font-normal tw-text-[clamp(2.75rem,6vw,5.5rem)] tw-leading-[1.05] tw-tracking-tight tw-text-[#e9e6df] tw-m-0">
 				Strategically Positioned in High Growth Markets
 			</h2>
 
 			<ul class="tw-list-none tw-p-0 tw-m-0 tw-flex tw-flex-col">
 				<?php foreach ( $markets_notes as $i => $note ) : ?>
-				<li class="tw-flex tw-items-center tw-gap-[clamp(1rem,2.5vw,2rem)] tw-py-[clamp(1.5rem,3vw,2.5rem)] !tw-border-t-[2px] !tw-border-solid !tw-border-white/25 <?php echo $i === count( $markets_notes ) - 1 ? '!tw-border-b-[2px]' : ''; ?>">
+				<li class="rsk-reveal rsk-reveal--slide-right tw-flex tw-items-center tw-gap-[clamp(1rem,2.5vw,2rem)] tw-py-[clamp(1.5rem,3vw,2.5rem)] !tw-border-t-[2px] !tw-border-solid !tw-border-white/25 <?php echo $i === count( $markets_notes ) - 1 ? '!tw-border-b-[2px]' : ''; ?>" style="--rsk-reveal-delay:<?php echo 180 + $i * 140; ?>ms">
 					<p class="tw-m-0 tw-flex-1 tw-font-sans tw-text-[clamp(0.95rem,1.1vw,1.15rem)] tw-leading-relaxed tw-text-white/85 tw-text-center">
 						<?php echo esc_html( $note ); ?>
 					</p>
@@ -54,7 +54,7 @@ $markets_notes = array(
 		</div>
 
 		<!-- City carousel -->
-		<div class="rsk-cities tw-mt-[clamp(2.5rem,5vw,4rem)]" data-rsk-cities data-interval="3000" data-visible="5" data-active-index="2">
+		<div class="rsk-cities rsk-reveal rsk-reveal--rise-image tw-mt-[clamp(2.5rem,5vw,4rem)]" data-rsk-cities data-interval="3000" data-visible="5" data-active-index="2" style="--rsk-reveal-delay:280ms">
 			<div class="rsk-cities__viewport">
 				<ul class="rsk-cities__track tw-list-none tw-p-0 tw-m-0">
 					<?php foreach ( $markets_cities as $i => $city ) : ?>

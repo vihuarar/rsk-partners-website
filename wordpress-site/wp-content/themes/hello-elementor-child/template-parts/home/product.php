@@ -38,7 +38,7 @@ $product_cols = array(
 	<div class="tw-grid tw-grid-cols-1 md:tw-grid-cols-[27%_46%_27%] tw-items-stretch md:tw-aspect-[16/5.5]">
 
 		<!-- Left image -->
-		<figure class="tw-relative tw-m-0 tw-h-full tw-min-h-[60vw] md:tw-min-h-0">
+		<figure class="rsk-reveal rsk-reveal--slide-left tw-relative tw-m-0 tw-h-full tw-min-h-[60vw] md:tw-min-h-0">
 			<img
 				src="<?php echo esc_url( $img . '/product-interior-1.jpg' ); ?>"
 				alt=""
@@ -57,15 +57,15 @@ $product_cols = array(
 
 			<p class="tw-m-0 tw-font-sans tw-text-[0.55rem] tw-font-medium tw-tracking-[0.3em] tw-uppercase tw-text-white/40 tw-text-right">RSK REAL ESTATE PARTNERS</p>
 
-			<h2 class="tw-font-serif tw-font-normal tw-text-[clamp(3rem,6.5vw,6rem)] tw-leading-none tw-tracking-tight tw-text-white tw-text-center tw-mt-[clamp(0.5rem,1.5vw,1.5rem)] tw-mb-[clamp(1rem,2vw,1.5rem)]">
+			<h2 class="rsk-reveal rsk-reveal--rise tw-font-serif tw-font-normal tw-text-[clamp(3rem,6.5vw,6rem)] tw-leading-none tw-tracking-tight tw-text-white tw-text-center tw-mt-[clamp(0.5rem,1.5vw,1.5rem)] tw-mb-[clamp(1rem,2vw,1.5rem)]" style="--rsk-reveal-delay:80ms">
 				PRODUCT
 			</h2>
 
-			<div class="tw-h-px tw-bg-white/20 tw-mb-[clamp(1rem,2vw,1.5rem)]" aria-hidden="true"></div>
+			<div class="rsk-reveal rsk-reveal--fade tw-h-px tw-bg-white/20 tw-mb-[clamp(1rem,2vw,1.5rem)]" aria-hidden="true" style="--rsk-reveal-delay:200ms"></div>
 
 			<div class="tw-grid tw-grid-cols-1 sm:tw-grid-cols-3 tw-gap-x-[clamp(1rem,2vw,2rem)] tw-gap-y-6">
-				<?php foreach ( $product_cols as $col ) : ?>
-				<div>
+				<?php foreach ( $product_cols as $i => $col ) : ?>
+				<div class="rsk-reveal rsk-reveal--fade" style="--rsk-reveal-delay:<?php echo 260 + $i * 80; ?>ms">
 					<p class="tw-m-0 tw-mb-2 tw-font-serif tw-italic tw-text-[clamp(1.15rem,1.5vw,1.6rem)] tw-leading-none tw-text-white/45">
 						<?php echo esc_html( $col['num'] ); ?>/
 					</p>
@@ -77,7 +77,7 @@ $product_cols = array(
 			</div>
 
 			<!-- Gallery strip -->
-			<ul class="tw-mt-auto tw-pt-[clamp(1.25rem,2.5vw,2rem)] tw-list-none tw-p-0 tw-m-0 tw-grid tw-grid-cols-5 tw-gap-[clamp(0.35rem,0.6vw,0.65rem)]" aria-label="Product gallery">
+			<ul class="rsk-reveal rsk-reveal--fade tw-mt-auto tw-pt-[clamp(1.25rem,2.5vw,2rem)] tw-list-none tw-p-0 tw-m-0 tw-grid tw-grid-cols-5 tw-gap-[clamp(0.35rem,0.6vw,0.65rem)]" aria-label="Product gallery" style="--rsk-reveal-delay:480ms">
 				<?php foreach ( $product_gallery as $g ) : ?>
 				<li class="tw-m-0">
 					<a
@@ -99,7 +99,7 @@ $product_cols = array(
 		</div>
 
 		<!-- Right image -->
-		<figure class="tw-relative tw-m-0 tw-h-full tw-min-h-[60vw] md:tw-min-h-0">
+		<figure class="rsk-reveal rsk-reveal--slide-right tw-relative tw-m-0 tw-h-full tw-min-h-[60vw] md:tw-min-h-0" style="--rsk-reveal-delay:100ms">
 			<img
 				src="<?php echo esc_url( $img . '/product-interior-2.jpg' ); ?>"
 				alt=""

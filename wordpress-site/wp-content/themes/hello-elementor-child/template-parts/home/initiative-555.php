@@ -35,14 +35,14 @@ $initiative_stats = array(
 
 			<div class="tw-flex-1">
 
-				<h2 class="tw-font-serif tw-font-normal tw-text-white tw-text-[clamp(2.75rem,5.5vw,5.25rem)] tw-leading-[1.0] tw-m-0 tw-mb-[clamp(2rem,4vw,3.5rem)]">
+				<h2 class="rsk-reveal rsk-reveal--rise tw-font-serif tw-font-normal tw-text-white tw-text-[clamp(2.75rem,5.5vw,5.25rem)] tw-leading-[1.0] tw-m-0 tw-mb-[clamp(2rem,4vw,3.5rem)]">
 					THE 5|5|5<br>
 					INITIATIVE
 				</h2>
 
 				<div class="tw-flex tw-items-end tw-gap-[clamp(1.25rem,2.5vw,2.25rem)] tw-flex-wrap">
-					<?php foreach ( $initiative_stats as $stat ) : ?>
-					<div class="tw-flex tw-flex-col tw-items-center tw-gap-3 tw-shrink-0">
+					<?php foreach ( $initiative_stats as $i => $stat ) : ?>
+					<div class="rsk-reveal rsk-reveal--rise-image tw-flex tw-flex-col tw-items-center tw-gap-3 tw-shrink-0" style="--rsk-reveal-delay:<?php echo 200 + $i * 100; ?>ms">
 						<div class="tw-w-[clamp(92px,10vw,124px)] tw-h-[clamp(92px,10vw,124px)] tw-shrink-0 tw-aspect-square tw-rounded-full !tw-border-2 !tw-border-solid !tw-border-white tw-flex tw-items-center tw-justify-center">
 							<span
 								class="tw-font-serif tw-text-white tw-text-[clamp(2rem,3.6vw,3.15rem)] tw-font-normal tw-inline-block"
@@ -61,7 +61,7 @@ $initiative_stats = array(
 
 			<div class="tw-hidden md:tw-block tw-self-stretch tw-flex-none tw-w-px tw-bg-white/25"></div>
 
-			<div class="tw-flex-1 md:tw-max-w-[38ch]">
+			<div class="rsk-reveal rsk-reveal--fade tw-flex-1 md:tw-max-w-[38ch]" style="--rsk-reveal-delay:300ms">
 				<p class="tw-m-0 tw-mb-5 tw-font-sans tw-text-white tw-text-[clamp(0.9rem,1.05vw,1rem)] tw-leading-relaxed tw-font-medium">
 					The 5|5|5 Initiative is our commitment to expanding attainable housing across America&rsquo;s fastest-growing markets.
 				</p>

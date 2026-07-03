@@ -30,14 +30,14 @@ $contact_socials = array(
 		<!-- LEFT: text block -->
 		<div class="tw-relative tw-flex tw-flex-col tw-px-[clamp(1.75rem,5vw,5.5rem)] tw-py-[clamp(2rem,5vw,4rem)]">
 
-			<h2 class="tw-font-serif tw-font-normal tw-text-white tw-leading-[0.95] tw-tracking-tight tw-m-0 tw-text-[clamp(2.75rem,6.5vw,6rem)]">
+			<h2 class="rsk-reveal rsk-reveal--rise tw-font-serif tw-font-normal tw-text-white tw-leading-[0.95] tw-tracking-tight tw-m-0 tw-text-[clamp(2.75rem,6.5vw,6rem)]">
 				Contact
 			</h2>
-			<p class="tw-mt-4 tw-max-w-[38ch] tw-font-sans tw-text-white/80 tw-text-[clamp(0.9rem,1vw,1.05rem)] tw-leading-relaxed">
+			<p class="rsk-reveal rsk-reveal--fade tw-mt-4 tw-max-w-[38ch] tw-font-sans tw-text-white/80 tw-text-[clamp(0.9rem,1vw,1.05rem)] tw-leading-relaxed" style="--rsk-reveal-delay:120ms">
 				Whether you&rsquo;re an investor, broker, landowner, future resident, or future team member, we&rsquo;d love to connect.
 			</p>
 
-			<div class="tw-mt-auto tw-grid tw-grid-cols-1 md:tw-grid-cols-[1fr_auto] tw-gap-x-[clamp(1.5rem,3vw,3rem)] tw-gap-y-8 tw-items-end tw-pt-[clamp(3rem,6vw,5rem)]">
+			<div class="rsk-reveal rsk-reveal--fade tw-mt-auto tw-grid tw-grid-cols-1 md:tw-grid-cols-[1fr_auto] tw-gap-x-[clamp(1.5rem,3vw,3rem)] tw-gap-y-8 tw-items-end tw-pt-[clamp(3rem,6vw,5rem)]" style="--rsk-reveal-delay:200ms">
 				<h3 class="tw-font-serif tw-font-normal tw-text-white tw-leading-[0.95] tw-tracking-tight tw-m-0 tw-text-[clamp(2.75rem,6.5vw,6rem)]">
 					Partner<br>With&nbsp;Us
 				</h3>
@@ -76,9 +76,9 @@ $contact_socials = array(
 		</div>
 
 		<!-- RIGHT: image -->
-		<figure class="tw-relative tw-m-0 tw-h-full tw-min-h-[60vw] md:tw-min-h-0 tw-flex tw-items-stretch tw-justify-end tw-bg-[#224378] tw-overflow-hidden">
+		<figure class="rsk-reveal rsk-reveal--slide-right tw-relative tw-m-0 tw-h-full tw-min-h-[60vw] md:tw-min-h-0 tw-overflow-hidden tw-bg-[#224378]" style="--rsk-reveal-delay:80ms">
 			<img
-				class="!tw-h-full !tw-w-auto !tw-max-w-none tw-block"
+				class="!tw-absolute tw-inset-0 !tw-w-full !tw-h-full !tw-max-w-none tw-object-cover tw-object-right"
 				src="<?php echo esc_url( $img . '/contact-house.webp' ); ?>"
 				alt=""
 				loading="lazy"
