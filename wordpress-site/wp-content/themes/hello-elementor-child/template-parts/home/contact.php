@@ -25,7 +25,7 @@ $contact_socials = array(
 	class="rsk-contact tw-relative tw-left-1/2 tw-right-1/2 -tw-mx-[50vw] tw-w-screen tw-overflow-hidden !tw-bg-[#224378] tw-text-white"
 	data-rsk-reveal
 >
-	<div class="tw-grid tw-grid-cols-1 md:tw-grid-cols-[1.15fr_1fr] tw-items-stretch tw-min-h-[clamp(24rem,55vh,42rem)]">
+	<div class="tw-grid tw-grid-cols-1 md:tw-grid-cols-[1.15fr_1fr] tw-items-stretch tw-min-h-[clamp(28rem,75vh,50rem)]">
 
 		<!-- LEFT: text block -->
 		<div class="tw-relative tw-flex tw-flex-col tw-px-[clamp(1.75rem,5vw,5.5rem)] tw-py-[clamp(2rem,5vw,4rem)]">
@@ -78,7 +78,7 @@ $contact_socials = array(
 		<!-- RIGHT: image -->
 		<figure class="rsk-reveal rsk-reveal--slide-right tw-relative tw-m-0 tw-h-full tw-min-h-[60vw] md:tw-min-h-0 tw-overflow-hidden tw-bg-[#224378]" style="--rsk-reveal-delay:80ms">
 			<img
-				class="!tw-absolute tw-inset-0 !tw-w-full !tw-h-full !tw-max-w-none tw-object-cover tw-object-right"
+				class="!tw-absolute tw-inset-0 !tw-w-full !tw-h-full !tw-max-w-none tw-object-cover tw-object-center"
 				src="<?php echo esc_url( $img . '/contact-house.webp' ); ?>"
 				alt=""
 				loading="lazy"
