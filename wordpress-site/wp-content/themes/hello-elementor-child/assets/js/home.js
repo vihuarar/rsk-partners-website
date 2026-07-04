@@ -3,6 +3,24 @@ import PhotoSwipeLightbox from 'photoswipe/lightbox';
 (function () {
 	'use strict';
 
+	/* ---------- Hero video: pick mobile vs desktop source ----------
+	   The <video> ships without a <source> so nothing downloads until we
+	   pick the right file for this viewport. Chrome ignores <source media>
+	   inside <video>, so we do it in JS. `preload="metadata"` on the tag
+	   keeps the transfer small until the browser actually needs frames. */
+	const heroVideo = document.querySelector('.rsk-hero__video');
+	if (heroVideo && heroVideo.dataset.srcMobile && heroVideo.dataset.srcDesktop) {
+		const mobileMax = parseInt(heroVideo.dataset.mobileMax, 10) || 768;
+		const isMobile = window.matchMedia('(max-width: ' + mobileMax + 'px)').matches;
+		const src = isMobile ? heroVideo.dataset.srcMobile : heroVideo.dataset.srcDesktop;
+		if (heroVideo.currentSrc !== src) {
+			heroVideo.src = src;
+			// autoplay will trigger once the browser is ready
+			const tryPlay = heroVideo.play();
+			if (tryPlay && typeof tryPlay.catch === 'function') tryPlay.catch(function () { /* muted autoplay may fail; leave the poster */ });
+		}
+	}
+
 	/* ---------- Product gallery lightbox (PhotoSwipe) ---------- */
 	if (document.querySelector('#rsk-pgal-gallery a[data-pswp-width]')) {
 		const lightbox = new PhotoSwipeLightbox({

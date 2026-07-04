@@ -39,11 +39,12 @@ $hero_slides = array(
 		muted
 		loop
 		playsinline
-		preload="auto"
+		preload="metadata"
 		poster="<?php echo esc_url( $img . '/hero-house.jpg' ); ?>"
-	>
-		<source src="<?php echo esc_url( $video . '/rsk-home.mp4' ); ?>" type="video/mp4">
-	</video>
+		data-src-mobile="<?php echo esc_url( $video . '/rsk-home.mobile.mp4' ); ?>"
+		data-src-desktop="<?php echo esc_url( $video . '/rsk-home.desktop.mp4' ); ?>"
+		data-mobile-max="768"
+	></video>
 	<div class="rsk-hero__overlay" aria-hidden="true"></div>
 
 	<div class="rsk-hero__inner">
