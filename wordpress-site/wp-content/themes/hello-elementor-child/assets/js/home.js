@@ -1,5 +1,20 @@
+import PhotoSwipeLightbox from 'photoswipe/lightbox';
+
 (function () {
 	'use strict';
+
+	/* ---------- Product gallery lightbox (PhotoSwipe) ---------- */
+	if (document.querySelector('#rsk-pgal-gallery a[data-pswp-width]')) {
+		const lightbox = new PhotoSwipeLightbox({
+			gallery: '#rsk-pgal-gallery',
+			children: 'a',
+			pswpModule: () => import('photoswipe'),
+			showHideAnimationType: 'fade',
+			bgOpacity: 0.92,
+			padding: { top: 40, bottom: 40, left: 20, right: 20 },
+		});
+		lightbox.init();
+	}
 
 	/* ---------- Hero slider ---------- */
 	const slider = document.querySelector('[data-rsk-slider]');
@@ -251,6 +266,57 @@
 		markActive();
 		start();
 	}
+
+	/* ---------- Product gallery carousel ----------
+	   Track holds N cards, only `data-visible` are shown at a time.
+	   Prev/next buttons translate the track by one card width; auto-
+	   advances on `data-interval`, pauses on hover, and wraps around
+	   at both ends. */
+	const pgals = document.querySelectorAll('[data-rsk-pgal]');
+	pgals.forEach(function (root) {
+		const track = root.querySelector('.rsk-pgal__track');
+		const cards = root.querySelectorAll('.rsk-pgal__card');
+		const prev  = root.querySelector('[data-rsk-pgal-prev]');
+		const next  = root.querySelector('[data-rsk-pgal-next]');
+		if (!track || !cards.length) return;
+
+		const visible  = parseInt(root.getAttribute('data-visible'), 10) || 5;
+		const interval = parseInt(root.getAttribute('data-interval'), 10) || 4500;
+		const total    = cards.length;
+		const maxIdx   = Math.max(0, total - visible);
+		let idx = 0;
+		let timer = null;
+
+		const apply = function () {
+			const card = cards[0];
+			const gap  = parseFloat(getComputedStyle(track).columnGap || getComputedStyle(track).gap || 0) || 0;
+			const step = card.getBoundingClientRect().width + gap;
+			track.style.transform = 'translate3d(-' + (step * idx) + 'px, 0, 0)';
+		};
+
+		const go = function (delta) {
+			idx += delta;
+			if (idx > maxIdx) idx = 0;
+			if (idx < 0)      idx = maxIdx;
+			apply();
+		};
+
+		const start = function () {
+			if (reduceMotion || total <= visible) return;
+			stop();
+			timer = setInterval(function () { go(1); }, interval);
+		};
+		const stop = function () { if (timer) { clearInterval(timer); timer = null; } };
+
+		if (prev) prev.addEventListener('click', function () { go(-1); start(); this.blur(); });
+		if (next) next.addEventListener('click', function () { go(1);  start(); this.blur(); });
+		root.addEventListener('mouseenter', stop);
+		root.addEventListener('mouseleave', start);
+		window.addEventListener('resize', apply);
+
+		apply();
+		start();
+	});
 
 	/* ---------- Scroll-reveal (re-triggers each time) ---------- */
 	const reveals = document.querySelectorAll('.rsk-reveal');

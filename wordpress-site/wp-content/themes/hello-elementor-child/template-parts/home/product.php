@@ -17,6 +17,11 @@ $product_gallery = array(
 	'product-gallery-3.jpg',
 	'product-gallery-4.jpg',
 	'product-gallery-5.jpg',
+	'product-gallery-6.jpg',
+	'product-gallery-7.jpg',
+	'product-gallery-8.jpg',
+	'product-gallery-9.jpg',
+	'product-gallery-10.jpg',
 );
 
 $product_cols = array(
@@ -76,26 +81,80 @@ $product_cols = array(
 				<?php endforeach; ?>
 			</div>
 
-			<!-- Gallery strip -->
-			<ul class="rsk-reveal rsk-reveal--fade tw-mt-auto tw-pt-[clamp(1.25rem,2.5vw,2rem)] tw-list-none tw-p-0 tw-m-0 tw-grid tw-grid-cols-5 tw-gap-[clamp(0.35rem,0.6vw,0.65rem)]" aria-label="Product gallery" style="--rsk-reveal-delay:480ms">
-				<?php foreach ( $product_gallery as $g ) : ?>
-				<li class="tw-m-0">
-					<a
-						href="<?php echo esc_url( $img . '/' . $g ); ?>"
-						class="tw-block tw-relative tw-overflow-hidden tw-aspect-[4/3] tw-ring-1 tw-ring-white/10 tw-transition tw-duration-500 hover:tw-ring-white/60 focus-visible:tw-outline focus-visible:tw-outline-2 focus-visible:tw-outline-white"
-						target="_blank"
-						rel="noopener"
+			<!-- Gallery carousel: 5 visible, prev/next arrows in side columns -->
+			<div
+				class="rsk-pgal rsk-reveal rsk-reveal--fade tw-mt-auto tw-pt-[clamp(1.25rem,2.5vw,2rem)]"
+				aria-label="Product gallery"
+				data-rsk-pgal
+				data-interval="4500"
+				data-visible="5"
+				style="--rsk-reveal-delay:480ms"
+			>
+				<div class="rsk-pgal__wrap">
+					<button
+						type="button"
+						class="rsk-pgal__nav rsk-pgal__nav--prev"
+						aria-label="Previous images"
+						data-rsk-pgal-prev
 					>
-						<img
-							src="<?php echo esc_url( $img . '/' . $g ); ?>"
-							alt=""
-							loading="lazy"
-							class="!tw-absolute tw-inset-0 !tw-w-full !tw-h-full !tw-max-w-none tw-object-cover tw-transition-transform tw-duration-700 hover:tw-scale-110"
-						>
-					</a>
-				</li>
-				<?php endforeach; ?>
-			</ul>
+						<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+							<polyline points="15 6 9 12 15 18"></polyline>
+						</svg>
+					</button>
+
+					<div class="rsk-pgal__viewport tw-overflow-hidden" id="rsk-pgal-gallery">
+						<ul class="rsk-pgal__track tw-list-none tw-p-0 tw-m-0 tw-flex">
+							<?php
+							$dir = get_stylesheet_directory() . '/assets/images/';
+							foreach ( $product_gallery as $g ) :
+								$thumb    = preg_replace( '/\.jpg$/', '.thumb.jpg', $g );
+								$full_url = $img . '/' . $g;
+								$size_w   = 0;
+								$size_h   = 0;
+								if ( file_exists( $dir . $g ) ) {
+									$s = getimagesize( $dir . $g );
+									if ( $s ) {
+										$size_w = (int) $s[0];
+										$size_h = (int) $s[1];
+									}
+								}
+							?>
+							<li class="rsk-pgal__card tw-m-0 tw-shrink-0">
+								<a
+									href="<?php echo esc_url( $full_url ); ?>"
+									data-pswp-width="<?php echo esc_attr( $size_w ); ?>"
+									data-pswp-height="<?php echo esc_attr( $size_h ); ?>"
+									class="tw-block tw-relative tw-overflow-hidden tw-aspect-[4/3] tw-ring-1 tw-ring-white/10 tw-transition tw-duration-500 hover:tw-ring-white/60 focus-visible:tw-outline focus-visible:tw-outline-2 focus-visible:tw-outline-white"
+									target="_blank"
+									rel="noopener"
+								>
+									<img
+										src="<?php echo esc_url( $img . '/' . $thumb ); ?>"
+										alt=""
+										loading="lazy"
+										decoding="async"
+										width="400"
+										height="300"
+										class="!tw-absolute tw-inset-0 !tw-w-full !tw-h-full !tw-max-w-none tw-object-cover tw-transition-transform tw-duration-700 hover:tw-scale-110"
+									>
+								</a>
+							</li>
+							<?php endforeach; ?>
+						</ul>
+					</div>
+
+					<button
+						type="button"
+						class="rsk-pgal__nav rsk-pgal__nav--next"
+						aria-label="Next images"
+						data-rsk-pgal-next
+					>
+						<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+							<polyline points="9 6 15 12 9 18"></polyline>
+						</svg>
+					</button>
+				</div>
+			</div>
 		</div>
 
 		<!-- Right image -->

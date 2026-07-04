@@ -56,6 +56,14 @@ add_action( 'wp_enqueue_scripts', function () {
 			HELLO_ELEMENTOR_CHILD_VERSION
 		);
 
+		// PhotoSwipe stylesheet (lightbox for product gallery).
+		wp_enqueue_style(
+			'rsk-photoswipe',
+			get_stylesheet_directory_uri() . '/assets/vendor/photoswipe/photoswipe.css',
+			array(),
+			'5.4.4'
+		);
+
 		wp_enqueue_script(
 			'rsk-home',
 			get_stylesheet_directory_uri() . '/assets/js/home.js',
@@ -65,6 +73,36 @@ add_action( 'wp_enqueue_scripts', function () {
 		);
 	}
 }, 20 );
+
+/**
+ * PhotoSwipe uses native ES modules. WordPress's default script tags don't
+ * declare type="module", so we filter the tag for our home.js when it's on
+ * the front page, and also let the browser resolve the two PhotoSwipe imports
+ * from the local vendor directory via an import map.
+ */
+add_filter( 'script_loader_tag', function ( $tag, $handle, $src ) {
+	if ( 'rsk-home' === $handle ) {
+		$tag = str_replace( ' src=', ' type="module" src=', $tag );
+	}
+	return $tag;
+}, 10, 3 );
+
+add_action( 'wp_head', function () {
+	if ( ! is_front_page() ) {
+		return;
+	}
+	$base = get_stylesheet_directory_uri() . '/assets/vendor/photoswipe/';
+	?>
+	<script type="importmap">
+	{
+		"imports": {
+			"photoswipe": "<?php echo esc_url( $base . 'photoswipe.esm.js' ); ?>",
+			"photoswipe/lightbox": "<?php echo esc_url( $base . 'photoswipe-lightbox.esm.js' ); ?>"
+		}
+	}
+	</script>
+	<?php
+}, 5 );
 
 /**
  * Force the child theme's front-page.php on the site's front page.
