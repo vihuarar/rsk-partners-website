@@ -25,7 +25,7 @@ $what_paragraphs = array(
 $what_products = array(
 	array(
 		'type'    => 'image',
-		'src'     => 'external-facade-first-image-what-we-do.png',
+		'src'     => 'external-facade-first-image-what-we-do.jpg',
 		'caption' => 'Single Family Homes',
 	),
 	array(
@@ -35,7 +35,7 @@ $what_products = array(
 	),
 	array(
 		'type'    => 'image',
-		'src'     => 'external-facade-third-image-what-we-do.png',
+		'src'     => 'external-facade-third-image-what-we-do.jpg',
 		'caption' => 'Townhomes',
 	),
 );
@@ -83,6 +83,10 @@ $what_products = array(
 									class="tw-w-full tw-aspect-[4/5] tw-object-cover tw-block"
 									src="<?php echo esc_url( $img . '/' . $p['src'] ); ?>"
 									alt="<?php echo esc_attr( $p['caption'] ); ?>"
+									loading="lazy"
+									decoding="async"
+									width="600"
+									height="750"
 								>
 							<?php endif; ?>
 						</div>

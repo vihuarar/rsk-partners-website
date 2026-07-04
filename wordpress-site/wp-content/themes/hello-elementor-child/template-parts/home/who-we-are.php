@@ -94,8 +94,8 @@ $who_items = array(
 						aria-expanded="<?php echo $is_active ? 'true' : 'false'; ?>"
 						aria-controls="<?php echo esc_attr( $id ); ?>"
 					>
-						<span class="tw-font-serif tw-text-[clamp(1.6rem,2.6vw,2.4rem)] tw-leading-tight tw-text-rsk-navy"><?php echo esc_html( $item['title'] ); ?></span>
-						<span class="tw-font-sans tw-font-medium tw-text-[clamp(0.85rem,1vw,1rem)] tw-text-rsk-blue-soft tw-tracking-wide"><?php echo esc_html( $item['subtitle'] ); ?></span>
+						<span class="tw-font-serif tw-text-[clamp(1.35rem,2vw,1.9rem)] tw-leading-tight tw-text-rsk-navy"><?php echo esc_html( $item['title'] ); ?></span>
+						<span class="tw-font-sans tw-font-medium tw-text-[clamp(0.8rem,0.9vw,0.95rem)] tw-text-rsk-blue-soft tw-tracking-wide"><?php echo esc_html( $item['subtitle'] ); ?></span>
 					</button>
 
 					<div

@@ -66,6 +66,43 @@ Then log in at <http://localhost:8080/wp-admin/>.
 
 The script is idempotent — re-running with the same username resets the password and forces the `administrator` role.
 
+### 3b. Create a wp-admin user on a remote host (SQL)
+
+Use this when you can't run the local script — e.g. WP Engine's phpMyAdmin, or any host where you have DB access but not a shell. WordPress accepts an MD5 hash as a legacy password and auto-upgrades it to PHPass on first login.
+
+```sql
+-- Change these four values to whatever you want
+SET @login    = 'clientadmin';
+SET @email    = 'admin@rskpartners.com';
+SET @password = 'ChangeMe!2026';
+SET @display  = 'RSK Admin';
+
+-- Insert the user row (MD5 is fine — WordPress upgrades it on first login)
+INSERT INTO wp_users
+  (user_login, user_pass, user_nicename, user_email, user_registered, display_name)
+VALUES
+  (@login, MD5(@password), @login, @email, NOW(), @display);
+
+SET @uid = LAST_INSERT_ID();
+
+-- Grant administrator role + level 10
+INSERT INTO wp_usermeta (user_id, meta_key, meta_value) VALUES
+  (@uid, 'wp_capabilities', 'a:1:{s:13:"administrator";b:1;}'),
+  (@uid, 'wp_user_level',   '10'),
+  (@uid, 'nickname',        @login),
+  (@uid, 'first_name',      ''),
+  (@uid, 'last_name',       '');
+
+SELECT @uid AS new_user_id;
+```
+
+**Gotchas:**
+
+1. **Table prefix.** Assumes the default `wp_` prefix. If the host uses something like `wpxx_`, replace **every** `wp_` — including inside the serialized string `'a:1:{s:13:"administrator";b:1;}'`. The `wp_capabilities` meta key must match the table prefix (`wpxx_capabilities`, `wpxx_user_level`). Check first with `SHOW TABLES LIKE '%users%';`.
+2. **Login URL.** After running, log in at `https://yoursite.com/wp-login.php` with `@login` / `@password`.
+3. **Rotate the password.** Once logged in, go to *Users → Your Profile → New Password* and set a real one. WordPress will re-hash it with PHPass and the MD5 is gone from the DB.
+4. **On WP Engine specifically** the User Portal → *Users* tab creates admin users through their UI without touching SQL. Use that if you have portal access; SQL is the fallback when you don't.
+
 ## Day-to-day commands
 
 ```bash
