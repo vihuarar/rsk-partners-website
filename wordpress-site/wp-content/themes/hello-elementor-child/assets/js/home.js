@@ -129,7 +129,6 @@ import PhotoSwipeLightbox from 'photoswipe/lightbox';
 	if (citiesRoot) {
 		const track = citiesRoot.querySelector('.rsk-cities__track');
 		const interval = parseInt(citiesRoot.getAttribute('data-interval'), 10) || 3000;
-		const activeIndex = parseInt(citiesRoot.getAttribute('data-active-index'), 10) || 2;
 		const slideDuration = 700;
 		let timer = null;
 		let sliding = false;
@@ -138,7 +137,19 @@ import PhotoSwipeLightbox from 'photoswipe/lightbox';
 			return parseFloat(getComputedStyle(track).columnGap || getComputedStyle(track).gap) || 0;
 		}
 
+		// Compute the middle visible index from the current CSS var. Mobile
+		// shows 3 cards → middle=1, tablet shows 4 → middle=1, desktop shows
+		// 5 → middle=2. Keeps the highlighted card visually centered at every
+		// breakpoint instead of drifting to the right edge on small screens.
+		function computeActiveIndex() {
+			const visibleStr = getComputedStyle(citiesRoot).getPropertyValue('--rsk-cities-visible').trim();
+			const visible = parseInt(visibleStr, 10) || 5;
+			return Math.floor(visible / 2);
+		}
+		let activeIndex = computeActiveIndex();
+
 		function markActive() {
+			activeIndex = computeActiveIndex();
 			const cards = Array.from(track.children);
 			cards.forEach((c, i) => {
 				c.classList.toggle('is-active', i === activeIndex);
@@ -149,6 +160,12 @@ import PhotoSwipeLightbox from 'photoswipe/lightbox';
 				setTimeout(() => centerCard.classList.remove('is-changing'), slideDuration + 250);
 			}
 		}
+
+		let resizeTimer = null;
+		window.addEventListener('resize', function () {
+			clearTimeout(resizeTimer);
+			resizeTimer = setTimeout(markActive, 150);
+		});
 
 		function slideLeft() {
 			if (sliding) return;
