@@ -315,12 +315,21 @@ import PhotoSwipeLightbox from 'photoswipe/lightbox';
 		const next  = root.querySelector('[data-rsk-pgal-next]');
 		if (!track || !cards.length) return;
 
-		const visible  = parseInt(root.getAttribute('data-visible'), 10) || 5;
 		const interval = parseInt(root.getAttribute('data-interval'), 10) || 4500;
 		const total    = cards.length;
-		const maxIdx   = Math.max(0, total - visible);
 		let idx = 0;
 		let timer = null;
+
+		// Derive `visible` from the viewport / card widths so JS stays in sync
+		// with the CSS breakpoints that pick 4 vs 5 cards per row.
+		const computeVisible = function () {
+			const viewport = root.querySelector('.rsk-pgal__viewport');
+			const card = cards[0];
+			const cardW = card.getBoundingClientRect().width;
+			if (!viewport || !cardW) return parseInt(root.getAttribute('data-visible'), 10) || 5;
+			const gap = parseFloat(getComputedStyle(track).columnGap || getComputedStyle(track).gap || 0) || 0;
+			return Math.max(1, Math.round((viewport.getBoundingClientRect().width + gap) / (cardW + gap)));
+		};
 
 		const apply = function () {
 			const card = cards[0];
@@ -330,6 +339,8 @@ import PhotoSwipeLightbox from 'photoswipe/lightbox';
 		};
 
 		const go = function (delta) {
+			const visible = computeVisible();
+			const maxIdx  = Math.max(0, total - visible);
 			idx += delta;
 			if (idx > maxIdx) idx = 0;
 			if (idx < 0)      idx = maxIdx;
@@ -337,7 +348,7 @@ import PhotoSwipeLightbox from 'photoswipe/lightbox';
 		};
 
 		const start = function () {
-			if (reduceMotion || total <= visible) return;
+			if (reduceMotion || total <= computeVisible()) return;
 			stop();
 			timer = setInterval(function () { go(1); }, interval);
 		};

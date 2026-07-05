@@ -582,7 +582,7 @@
 }
 
 /* ---------- Product gallery: horizontal carousel with prev/next ---------- */
-.rsk-pgal { --rsk-pgal-gap: clamp(0.35rem, 0.6vw, 0.65rem); --rsk-pgal-visible: 5; }
+.rsk-pgal { --rsk-pgal-gap: clamp(0.35rem, 0.6vw, 0.65rem); }
 .rsk-pgal__wrap {
 	display: grid;
 	grid-template-columns: auto minmax(0, 1fr) auto;
@@ -595,9 +595,35 @@
 	transition: transform 600ms cubic-bezier(0.22, 1, 0.36, 1);
 	will-change: transform;
 }
+/* Card width per breakpoint. Avoid nested var()/subtraction inside flex-basis
+   calc — Safari collapses those to min-content, which zeroes the card
+   because the <img> is absolutely positioned. Setting flex-basis to a plain
+   percentage (with per-breakpoint values that already account for the gaps)
+   sidesteps the bug. */
 .rsk-pgal__card {
-	/* (100% - (visible-1) gaps) / visible per card */
-	flex: 0 0 calc((100% - (var(--rsk-pgal-visible) - 1) * var(--rsk-pgal-gap)) / var(--rsk-pgal-visible));
+	flex: 0 0 auto;
+	width: calc((100% - 3 * var(--rsk-pgal-gap)) / 4); /* mobile: 4 visible */
+	min-width: 0;
+}
+@media (min-width: 480px) {
+	.rsk-pgal__card { width: calc((100% - 4 * var(--rsk-pgal-gap)) / 5); } /* 5 visible */
+}
+/* Aspect-ratio on <a> is unreliable in Safari; put the ratio on a nested
+   frame via padding-top so height is guaranteed to derive from width. */
+.rsk-pgal__card > a {
+	display: block;
+	position: relative;
+	overflow: hidden;
+	width: 100%;
+	padding-top: 75%; /* 4:3 */
+}
+.rsk-pgal__card > a > img {
+	position: absolute !important;
+	inset: 0;
+	width: 100% !important;
+	height: 100% !important;
+	max-width: none !important;
+	object-fit: cover;
 }
 .rsk-pgal__nav {
 	background: transparent;
