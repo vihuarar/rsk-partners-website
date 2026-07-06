@@ -9,7 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'HELLO_ELEMENTOR_CHILD_VERSION', '1.0.0' );
+define( 'HELLO_ELEMENTOR_CHILD_VERSION', '1.0.1' );
 
 add_action( 'wp_enqueue_scripts', function () {
 	$parent_handle = 'hello-elementor';
