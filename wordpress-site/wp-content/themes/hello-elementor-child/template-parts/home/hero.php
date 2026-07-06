@@ -48,6 +48,20 @@ $hero_slides = array(
 	<div class="rsk-hero__overlay" aria-hidden="true"></div>
 
 	<div class="rsk-hero__inner">
+		<nav class="rsk-hero__dots" aria-label="Hero slides">
+			<?php foreach ( $hero_slides as $i => $slide ) :
+				$is_active = ( 0 === $i );
+			?>
+			<button
+				type="button"
+				class="rsk-hero__dot<?php echo $is_active ? ' is-active' : ''; ?>"
+				data-go="<?php echo (int) $i; ?>"
+				aria-label="<?php echo esc_attr( sprintf( 'Go to slide %d', $i + 1 ) ); ?>"
+				aria-current="<?php echo $is_active ? 'true' : 'false'; ?>"
+			></button>
+			<?php endforeach; ?>
+		</nav>
+
 		<div class="rsk-hero__slides" data-rsk-slider>
 			<?php foreach ( $hero_slides as $i => $slide ) :
 				$is_active = ( 0 === $i );
@@ -73,19 +87,5 @@ $hero_slides = array(
 			</article>
 			<?php endforeach; ?>
 		</div>
-
-		<nav class="rsk-hero__dots" aria-label="Hero slides">
-			<?php foreach ( $hero_slides as $i => $slide ) :
-				$is_active = ( 0 === $i );
-			?>
-			<button
-				type="button"
-				class="rsk-hero__dot<?php echo $is_active ? ' is-active' : ''; ?>"
-				data-go="<?php echo (int) $i; ?>"
-				aria-label="<?php echo esc_attr( sprintf( 'Go to slide %d', $i + 1 ) ); ?>"
-				aria-current="<?php echo $is_active ? 'true' : 'false'; ?>"
-			></button>
-			<?php endforeach; ?>
-		</nav>
 	</div>
 </section>
