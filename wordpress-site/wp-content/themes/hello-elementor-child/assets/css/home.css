@@ -506,6 +506,11 @@
 .home .elementor-location-footer .elementor-top-section {
 	background: #fff !important;
 }
+/* Wrap the footer logo image in the Contact section's navy. */
+.home .elementor-location-footer .elementor-widget-image img {
+	background: #224378;
+	padding: 7px;
+}
 .home .elementor-location-footer,
 .home .elementor-location-footer .elementor-nav-menu a,
 .home .elementor-location-footer .elementor-item,
