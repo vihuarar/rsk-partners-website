@@ -58,13 +58,11 @@ $markets_notes = array(
 			<div class="rsk-cities__viewport">
 				<ul class="rsk-cities__track tw-list-none tw-p-0 tw-m-0">
 					<?php foreach ( $markets_cities as $i => $city ) : ?>
-					<li class="rsk-cities__card" data-city-name="<?php echo esc_attr( $city['name'] ); ?>">
-						<img
-							class="rsk-cities__img !tw-max-w-none tw-object-cover"
-							src="<?php echo esc_url( $img . '/' . $city['img'] ); ?>"
-							alt=""
-							loading="lazy"
-						>
+					<li
+						class="rsk-cities__card"
+						data-city-name="<?php echo esc_attr( $city['name'] ); ?>"
+						style="--rsk-card-img: url('<?php echo esc_url( $img . '/' . $city['img'] ); ?>');"
+					>
 						<span class="rsk-cities__overlay" aria-hidden="true"></span>
 						<span class="rsk-cities__label tw-font-sans tw-uppercase tw-tracking-[0.18em] tw-font-semibold tw-text-white">
 							<?php echo esc_html( $city['name'] ); ?>

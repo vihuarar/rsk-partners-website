@@ -707,7 +707,15 @@
 	.rsk-cities { --rsk-cities-visible: 4; }
 }
 .rsk-cities__viewport {
-	overflow: hidden;
+	/* Only clip horizontal overflow (for the carousel sliding effect).
+	   Vertical must stay visible so the active card's transform:scale(1.06)
+	   can extend beyond the row without getting its rounded top/bottom
+	   corners chopped. Also add padding so the scale + drop shadow have
+	   room without being clipped by adjacent sections. */
+	overflow-x: hidden;
+	overflow-y: visible;
+	padding: clamp(1rem, 2vw, 1.75rem) 0;
+	margin: clamp(-1rem, -2vw, -1.75rem) 0;
 }
 .rsk-cities__track {
 	display: flex;
@@ -719,37 +727,43 @@
 	flex: 0 0 calc((100% - (var(--rsk-cities-visible) - 1) * var(--rsk-cities-gap)) / var(--rsk-cities-visible));
 	aspect-ratio: 3 / 4;
 	overflow: hidden;
-	border-radius: clamp(10px, 1.2vw, 18px);
+	/* City photo painted as a background — no child <img> whose size could
+	   diverge from the container. Keeps corner clipping bulletproof. */
+	background: var(--rsk-card-img) center/cover no-repeat;
+	border-radius: clamp(16px, 1.7vw, 24px);
 	cursor: pointer;
 	transform: scale(0.92);
 	transition:
 		transform 700ms cubic-bezier(0.22, 1, 0.36, 1),
 		box-shadow 700ms cubic-bezier(0.22, 1, 0.36, 1);
 	will-change: transform;
-}
-.rsk-cities__img {
-	position: absolute;
-	inset: 0;
-	width: 100% !important;
-	height: 100% !important;
+	/* Safari drops the border-radius clip when the card (or its children)
+	   are transformed. clip-path is the reliable modern fix — it clips
+	   correctly under nested transforms where overflow:hidden alone fails. */
+	-webkit-clip-path: inset(0 round clamp(16px, 1.7vw, 24px));
+	clip-path: inset(0 round clamp(16px, 1.7vw, 24px));
+	isolation: isolate;
 }
 .rsk-cities__card.is-active {
 	transform: scale(1.06);
-	box-shadow: 0 20px 40px -20px rgba(0, 0, 0, 0.6);
-	border-radius: clamp(14px, 1.6vw, 24px);
+	/* Tighter, less-blurred shadow so the bottom edge stays crisp and
+	   the corner arc reads as clearly as the top. */
+	box-shadow: 0 10px 24px -14px rgba(0, 0, 0, 0.55);
+	/* Slight zoom on the active card so the composition reads closer. */
+	background-size: auto 115%;
 	cursor: default;
 	z-index: 2;
 }
-.rsk-cities__img {
-	transition: filter 700ms cubic-bezier(0.22, 1, 0.36, 1), transform 900ms cubic-bezier(0.22, 1, 0.36, 1);
-}
-.rsk-cities__card.is-changing .rsk-cities__img {
-	animation: rsk-cities-pulse 900ms cubic-bezier(0.22, 1, 0.36, 1);
-}
-@keyframes rsk-cities-pulse {
-	0%   { transform: scale(1.03); filter: brightness(1) blur(0); }
-	40%  { transform: scale(1.09); filter: brightness(1.15) blur(1px); }
-	100% { transform: scale(1.03); filter: brightness(1) blur(0); }
+/* Subtle inner ring — makes all four corners read as equally rounded
+   regardless of the underlying photo content. */
+.rsk-cities__card.is-active::after {
+	content: "";
+	position: absolute;
+	inset: 0;
+	border: 1px solid rgba(255, 255, 255, 0.4);
+	border-radius: inherit;
+	pointer-events: none;
+	z-index: 3;
 }
 .rsk-cities__overlay {
 	position: absolute;
@@ -764,13 +778,6 @@
 }
 .rsk-cities__card.is-active .rsk-cities__overlay {
 	opacity: 0;
-}
-.rsk-cities__card .rsk-cities__img {
-	filter: brightness(0.9) saturate(0.6);
-}
-.rsk-cities__card.is-active .rsk-cities__img {
-	filter: none;
-	transform: scale(1.03);
 }
 .rsk-cities__label {
 	position: absolute;
@@ -804,7 +811,6 @@
 }
 @media (prefers-reduced-motion: reduce) {
 	.rsk-cities__card,
-	.rsk-cities__img,
 	.rsk-cities__overlay,
 	.rsk-cities__label {
 		transition: none;
