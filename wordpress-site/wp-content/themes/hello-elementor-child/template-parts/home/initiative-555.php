@@ -66,7 +66,7 @@ $initiative_stats = array(
 					The 5|5|5 Initiative is our commitment to expanding attainable housing across America&rsquo;s fastest-growing markets.
 				</p>
 				<p class="tw-m-0 tw-font-sans tw-text-white/80 tw-text-[clamp(0.85rem,0.95vw,0.95rem)] tw-leading-relaxed">
-					Every project, hire, process improvement, and investment decision supports this mission. Our goal is not simply growth — it is scalable impact.
+					Every project, hire, process improvement, and investment decision supports this mission. Our aim is not growth for its own sake — it is creating lasting impact at scale.
 				</p>
 			</div>
 

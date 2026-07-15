@@ -21,7 +21,7 @@ $markets_cities = array(
 
 $markets_notes = array(
 	'RSK targets markets with strong population growth, expanding employment sectors, and increasing demand for attainable housing.',
-	'Our disciplined market selection process allows us to focus capital and development efforts where long-term demographic and economic trends support scalable residential growth.',
+	'Our disciplined market selection process allows us to focus capital and development efforts where long-term demographic and economic trends support sustainable residential growth.',
 );
 ?>
 <section class="rsk-markets tw-relative !tw-bg-[#141414] tw-text-white tw-pt-[clamp(6rem,14vw,12rem)] tw-pb-[clamp(4rem,8vw,7rem)] -tw-mt-[clamp(3rem,8vw,7rem)] tw-z-10 [clip-path:polygon(0_clamp(3rem,8vw,7rem),100%_0,100%_100%,0_100%)]" data-rsk-reveal>
@@ -38,15 +38,14 @@ $markets_notes = array(
 					<p class="tw-m-0 tw-flex-1 tw-font-sans tw-text-[clamp(0.95rem,1.1vw,1.15rem)] tw-leading-relaxed tw-text-white/85 tw-text-center">
 						<?php echo esc_html( $note ); ?>
 					</p>
-					<button
-						type="button"
-						aria-label="Previous market <?php echo esc_attr( $i + 1 ); ?>"
-						class="tw-shrink-0 tw-w-[clamp(58px,5.5vw,82px)] tw-h-[clamp(58px,5.5vw,82px)] tw-aspect-square tw-rounded-full !tw-border !tw-border-solid !tw-border-white/55 tw-flex tw-items-center tw-justify-center !tw-bg-transparent tw-transition hover:!tw-border-white focus:tw-outline-none focus-visible:tw-outline focus-visible:tw-outline-2 focus-visible:tw-outline-white"
+					<span
+						aria-hidden="true"
+						class="tw-shrink-0 tw-w-[clamp(58px,5.5vw,82px)] tw-h-[clamp(58px,5.5vw,82px)] tw-aspect-square tw-rounded-full !tw-border !tw-border-solid !tw-border-white/55 tw-flex tw-items-center tw-justify-center"
 					>
 						<svg viewBox="0 0 24 24" class="tw-w-[clamp(1.7rem,2.1vw,2.4rem)] tw-h-[clamp(1.7rem,2.1vw,2.4rem)] tw-text-white/85" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
 							<polyline points="15 6 9 12 15 18"></polyline>
 						</svg>
-					</button>
+					</span>
 				</li>
 				<?php endforeach; ?>
 			</ul>

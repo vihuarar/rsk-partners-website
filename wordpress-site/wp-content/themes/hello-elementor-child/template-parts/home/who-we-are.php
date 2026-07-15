@@ -22,7 +22,7 @@ $who_items = array(
 		'num'      => '01',
 		'title'    => 'Data-Driven Site Selection',
 		'subtitle' => 'Long-term demand, identified early',
-		'body'     => 'We invest where long-term demographic, economic, and housing fundamentals support durable demand. Our research process evaluates population growth, employment trends, housing supply constraints, affordability metrics, and migration patterns to identify opportunities before they become obvious to the broader market.',
+		'body'     => 'We invest where long-term demographic, economic, and housing fundamentals support durable demand. Our research process evaluates population growth, employment trends, housing supply constraints, and migration patterns to identify opportunities before they become obvious to the broader market.',
 	),
 	array(
 		'num'      => '02',
@@ -33,14 +33,14 @@ $who_items = array(
 	array(
 		'num'      => '03',
 		'title'    => 'Systematic Development',
-		'subtitle' => 'Repeatable processes, not one-off decisions',
-		'body'     => 'We believe the best results come from repeatable processes, not one-off decisions. Every stage of development follows a structured framework designed to improve efficiency, reduce risk, and create consistency across every community we build.',
+		'subtitle' => 'Repeatable processes, not ad hoc decisions',
+		'body'     => 'We believe the best results come from repeatable processes, not ad hoc decisions. Every stage of development follows a structured framework designed to improve efficiency, reduce risk, and create consistency across every community we build.',
 	),
 	array(
 		'num'      => '04',
 		'title'    => '5|5|5 Initiative',
 		'subtitle' => '5,000 Homes. 5 Markets. 5 Years.',
-		'body'     => 'The 5|5|5 Initiative is our commitment to expanding attainable housing across America&rsquo;s fastest-growing markets. Every project, hire, process improvement, and investment decision supports this mission. Our goal is not simply growth — it is scalable impact.',
+		'body'     => 'The 5|5|5 Initiative is our commitment to expanding attainable housing across America&rsquo;s fastest-growing markets. Every project, hire, process improvement, and investment decision supports this mission. Our goal is not simply growth — it is building a platform that delivers lasting impact at scale.',
 	),
 );
 ?>
