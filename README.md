@@ -66,6 +66,43 @@ Then log in at <http://localhost:8080/wp-admin/>.
 
 The script is idempotent — re-running with the same username resets the password and forces the `administrator` role.
 
+### 3b. Create a wp-admin user on a remote host (SQL)
+
+Use this when you can't run the local script — e.g. WP Engine's phpMyAdmin, or any host where you have DB access but not a shell. WordPress accepts an MD5 hash as a legacy password and auto-upgrades it to PHPass on first login.
+
+```sql
+-- Change these four values to whatever you want
+SET @login    = 'clientadmin';
+SET @email    = 'admin@rskpartners.com';
+SET @password = 'ChangeMe!2026';
+SET @display  = 'RSK Admin';
+
+-- Insert the user row (MD5 is fine — WordPress upgrades it on first login)
+INSERT INTO wp_users
+  (user_login, user_pass, user_nicename, user_email, user_registered, display_name)
+VALUES
+  (@login, MD5(@password), @login, @email, NOW(), @display);
+
+SET @uid = LAST_INSERT_ID();
+
+-- Grant administrator role + level 10
+INSERT INTO wp_usermeta (user_id, meta_key, meta_value) VALUES
+  (@uid, 'wp_capabilities', 'a:1:{s:13:"administrator";b:1;}'),
+  (@uid, 'wp_user_level',   '10'),
+  (@uid, 'nickname',        @login),
+  (@uid, 'first_name',      ''),
+  (@uid, 'last_name',       '');
+
+SELECT @uid AS new_user_id;
+```
+
+**Gotchas:**
+
+1. **Table prefix.** Assumes the default `wp_` prefix. If the host uses something like `wpxx_`, replace **every** `wp_` — including inside the serialized string `'a:1:{s:13:"administrator";b:1;}'`. The `wp_capabilities` meta key must match the table prefix (`wpxx_capabilities`, `wpxx_user_level`). Check first with `SHOW TABLES LIKE '%users%';`.
+2. **Login URL.** After running, log in at `https://yoursite.com/wp-login.php` with `@login` / `@password`.
+3. **Rotate the password.** Once logged in, go to *Users → Your Profile → New Password* and set a real one. WordPress will re-hash it with PHPass and the MD5 is gone from the DB.
+4. **On WP Engine specifically** the User Portal → *Users* tab creates admin users through their UI without touching SQL. Use that if you have portal access; SQL is the fallback when you don't.
+
 ## Day-to-day commands
 
 ```bash
@@ -87,6 +124,36 @@ docker exec -it rsk_wordpress bash
 # Open the MySQL CLI
 docker exec -it rsk_mysql mysql -urskrealestate -p wp_rskrealestate
 ```
+
+## Theme development (child theme + Tailwind)
+
+The custom theme lives at `wordpress-site/wp-content/themes/hello-elementor-child/` and ships with a **Tailwind CLI** build pipeline. Full docs are in `wordpress-site/wp-content/themes/hello-elementor-child/SETUP.md` — quick version below.
+
+### One-time install
+
+```bash
+cd wordpress-site/wp-content/themes/hello-elementor-child
+npm install
+```
+
+### Daily dev loop — leave this running
+
+```bash
+cd wordpress-site/wp-content/themes/hello-elementor-child
+npm run watch:css
+```
+
+Watches every PHP file and rebuilds `assets/css/tailwind.css` in ~300ms on save. The file is enqueued with `filemtime()` cache-busting, so a normal browser reload (`Cmd+R`) picks up the change — no need to re-run any build command.
+
+If the browser still shows stale CSS after a save, that's almost always the **Breeze** plugin cache. Top admin bar → **Breeze → Purge All Cache**.
+
+### One-shot production build
+
+```bash
+npm run build:css
+```
+
+Run this before committing if `tailwind.css` is checked in (it currently is — see `.gitignore` in the theme folder; `node_modules/` is ignored but the compiled CSS is committed so prod doesn't need Node).
 
 ## Refreshing the database
 

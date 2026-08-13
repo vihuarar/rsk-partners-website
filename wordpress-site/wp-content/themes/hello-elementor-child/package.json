@@ -1,0 +1,13 @@
+{
+  "name": "hello-elementor-child-rsk",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Hello Elementor Child — RSK Partners. Tailwind build pipeline for custom pages.",
+  "scripts": {
+    "build:css": "tailwindcss -i ./assets/css/tailwind.src.css -o ./assets/css/tailwind.css --minify",
+    "watch:css": "tailwindcss -i ./assets/css/tailwind.src.css -o ./assets/css/tailwind.css --watch"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.13"
+  }
+}

@@ -1,0 +1,824 @@
+/* ============================================================
+   RSK Partners — Home page styles
+   Loaded only on the front page (see functions.php).
+   ============================================================ */
+
+:root {
+	--rsk-navy:        #0b2545;
+	--rsk-navy-deep:   #061a36;
+	--rsk-blue:        #1f4e8c;
+	--rsk-blue-soft:   #3d6db0;
+	--rsk-cream:       #f4efe6;
+	--rsk-bg:          #ffffff;
+	--rsk-ink:         #0e1a2b;
+	--rsk-ink-soft:    #4a5568;
+	--rsk-rule:        rgba(11, 37, 69, 0.12);
+
+	--rsk-serif:       "Playfair Display", Georgia, "Times New Roman", serif;
+	--rsk-sans:        "DM Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+
+	--rsk-container:   1180px;
+	--rsk-gap:         clamp(1rem, 2.5vw, 2.25rem);
+	--rsk-section-y:   clamp(3rem, 7vw, 6rem);
+}
+
+/* ---------- Base ---------- */
+.rsk-home,
+.rsk-home * { box-sizing: border-box; }
+
+.rsk-home {
+	color: var(--rsk-ink);
+	font-family: var(--rsk-sans);
+	line-height: 1.55;
+	background: var(--rsk-bg);
+}
+
+.rsk-home img { max-width: 100%; height: auto; display: block; }
+
+.rsk-container {
+	width: 100%;
+	max-width: var(--rsk-container);
+	margin: 0 auto;
+	padding: 0 clamp(1rem, 3vw, 2rem);
+}
+
+.rsk-italic {
+	font-family: var(--rsk-serif);
+	font-style: italic;
+	font-weight: 500;
+}
+
+.rsk-section { padding: var(--rsk-section-y) 0; }
+
+.rsk-section__title {
+	font-family: var(--rsk-serif);
+	font-size: clamp(2.25rem, 5vw, 3.75rem);
+	line-height: 1.05;
+	margin: 0 0 2rem;
+	color: var(--rsk-ink);
+}
+.rsk-section__title--center { text-align: center; }
+
+.rsk-grid { display: grid; gap: var(--rsk-gap); }
+.rsk-grid--2 { grid-template-columns: 1fr; }
+
+@media (min-width: 860px) {
+	.rsk-grid--2 { grid-template-columns: 1fr 1fr; align-items: center; }
+}
+
+/* ---------- Hero ---------- */
+.rsk-hero {
+	position: relative;
+	min-height: 92vh;
+	display: flex;
+	align-items: flex-start;
+	color: #fff;
+	background: var(--rsk-navy);
+	overflow: hidden;
+	isolation: isolate;
+}
+
+.rsk-hero__video {
+	position: absolute;
+	inset: 0;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	z-index: 1;
+	pointer-events: none;
+}
+
+.rsk-hero__overlay {
+	position: absolute;
+	inset: 0;
+	z-index: 2;
+	background:
+		linear-gradient(180deg,
+			rgba(0, 0, 0, 0.45) 0%,
+			rgba(11, 37, 69, 0.30) 40%,
+			rgba(0, 0, 0, 0.55) 100%);
+}
+
+.rsk-hero__inner {
+	position: relative;
+	z-index: 3;
+	max-width: 1480px;
+	margin: 0 auto;
+	width: 100%;
+	padding: clamp(5rem, 10vh, 8rem) clamp(1.25rem, 4vw, 3.5rem) clamp(2rem, 5vh, 4rem);
+	display: grid;
+	/* Single column: dots row sits right above the slides, both pinned
+	   to the bottom of the hero container. */
+	grid-template-columns: 1fr;
+	grid-template-rows: auto auto;
+	align-content: end;
+	gap: clamp(0.75rem, 2vw, 1.25rem);
+	min-height: inherit;
+}
+
+/* Slides container — stack via grid in same cell */
+.rsk-hero__slides {
+	grid-column: 1;
+	grid-row: 2;
+	position: relative;
+	display: grid;
+}
+
+.rsk-hero__slide {
+	grid-column: 1;
+	grid-row: 1;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	justify-content: center;
+	gap: clamp(1.25rem, 2.5vw, 2rem);
+	opacity: 0;
+	visibility: hidden;
+	transform: translateY(8px);
+	transition:
+		opacity 0.55s ease,
+		transform 0.55s ease,
+		visibility 0s linear 0.55s;
+	pointer-events: none;
+}
+
+@media (min-width: 860px) {
+	.rsk-hero__slide {
+		flex-direction: row;
+		align-items: center;
+		justify-content: flex-start;
+		gap: 0;
+	}
+}
+
+.rsk-hero__slide-content {
+	display: flex;
+	flex-direction: column;
+	gap: clamp(1.25rem, 2.5vw, 2rem);
+}
+
+.rsk-hero__slide.is-active {
+	opacity: 1;
+	visibility: visible;
+	transform: none;
+	transition:
+		opacity 0.55s ease,
+		transform 0.55s ease,
+		visibility 0s linear 0s;
+	pointer-events: auto;
+}
+
+/* Dots — horizontal row sitting above the slide text on every breakpoint. */
+.rsk-hero__dots {
+	grid-column: 1;
+	grid-row: 1;
+	display: flex;
+	flex-direction: row;
+	gap: 0.85rem;
+	justify-self: start;
+	align-self: end;
+	margin: 0;
+}
+
+@media (min-width: 860px) {
+	.rsk-hero__dots {
+		/* Nudge in to align roughly with the title text (past the vline gutter) */
+		margin-left: calc(1px + clamp(1.25rem, 2vw, 2rem));
+	}
+}
+
+.rsk-hero__dot {
+	width: 9px;
+	height: 9px;
+	border-radius: 50%;
+	border: 1px solid rgba(255, 255, 255, 0.85);
+	background: transparent;
+	padding: 0;
+	cursor: pointer;
+	transition: background 0.2s ease, transform 0.2s ease;
+}
+.rsk-hero__dot:hover { background: rgba(255, 255, 255, 0.5); }
+.rsk-hero__dot.is-active {
+	background: #fff;
+	transform: scale(1.15);
+}
+.rsk-hero__dot:focus-visible {
+	outline: 2px solid rgba(255, 255, 255, 0.6);
+	outline-offset: 4px;
+}
+
+.rsk-hero__title {
+	font-family: var(--rsk-sans);
+	font-weight: 600;
+	font-size: clamp(1.5rem, 5.4vw, 5rem);
+	line-height: 1.05;
+	letter-spacing: -0.01em;
+	margin: 0;
+	text-transform: uppercase;
+	color: #fff;
+	overflow-wrap: break-word;
+	hyphens: auto;
+	text-shadow:
+		0 1px 2px rgba(0, 0, 0, 0.55),
+		0 4px 16px rgba(0, 0, 0, 0.5),
+		0 8px 40px rgba(0, 0, 0, 0.35);
+}
+@media (max-width: 480px) {
+	.rsk-hero__title { font-size: clamp(1.35rem, 6.5vw, 2.25rem); }
+}
+
+
+.rsk-hero__accent {
+	font-weight: 600;
+	color: #fff;
+}
+
+/* Vertical white line — hidden on mobile, left accent beside title on desktop */
+.rsk-hero__vline {
+	display: none;
+}
+@media (min-width: 860px) {
+	.rsk-hero__vline {
+		display: block;
+		flex: 0 0 1px;
+		align-self: stretch;
+		background: rgba(255, 255, 255, 0.45);
+		margin-right: clamp(1.25rem, 2vw, 2rem);
+	}
+}
+
+/* Hero intro (icon + body) — always stacked below the title */
+.rsk-hero__intro {
+	display: flex;
+	gap: 1rem;
+	align-items: flex-start;
+}
+
+.rsk-hero__body {
+	max-width: 38rem;
+}
+
+.rsk-hero__cta-dot {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 2.25rem;
+	height: 2.25rem;
+	border-radius: 50%;
+	background: #c25e57;
+	color: #fff;
+	flex-shrink: 0;
+	text-decoration: none;
+	transition: background 0.2s ease, transform 0.2s ease;
+}
+.rsk-hero__cta-dot:hover { background: #d36e66; transform: translateX(2px); }
+.rsk-hero__cta-dot svg { width: 1.05rem; height: 1.05rem; display: block; }
+
+.rsk-hero__body {
+	margin: 0;
+	color: rgba(255, 255, 255, 0.96);
+	font-family: var(--rsk-sans);
+	font-weight: 400;
+	font-size: clamp(0.75rem, 0.95vw, 0.95rem);
+	line-height: 1.55;
+	text-shadow:
+		0 1px 2px rgba(0, 0, 0, 0.6),
+		0 2px 10px rgba(0, 0, 0, 0.5);
+}
+.rsk-hero__body strong { font-weight: 600; }
+
+/* Respect users who don't want motion */
+@media (prefers-reduced-motion: reduce) {
+	.rsk-hero__video { display: none; }
+	.rsk-hero {
+		background:
+			linear-gradient(rgba(11, 37, 69, 0.6), rgba(11, 37, 69, 0.6)),
+			var(--rsk-navy);
+	}
+}
+
+/* ---------- Who We Are ---------- */
+.rsk-who { background: #fff; }
+
+.rsk-who__grid {
+	display: grid;
+	gap: clamp(1.5rem, 3vw, 2.5rem);
+	grid-template-columns: 1fr;
+	grid-template-areas:
+		"heading"
+		"media"
+		"panel";
+}
+
+@media (min-width: 900px) {
+	.rsk-who__grid {
+		grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
+		grid-template-areas:
+			"heading panel"
+			"media   panel";
+		align-items: start;
+	}
+}
+
+.rsk-who__heading { grid-area: heading; margin: 0; }
+.rsk-who__heading h2 {
+	font-family: var(--rsk-serif);
+	font-size: clamp(2.5rem, 6vw, 4.75rem);
+	line-height: 1;
+	margin: 0;
+	color: var(--rsk-navy);
+	font-weight: 400;
+	font-style: normal;
+}
+.rsk-who__heading h2 > span:last-child {
+	display: inline-block;
+	margin-left: clamp(1rem, 4vw, 3rem);
+}
+
+/* Media (image + vertical label) — keeps natural aspect, anchored to bottom so it lines
+   up with the bottom edge of the panel on the right regardless of accordion content height */
+.rsk-who__media {
+	grid-area: media;
+	position: relative;
+	margin: 0;
+	padding-left: 2.25rem;
+	align-self: stretch;
+	display: flex;
+	flex-direction: column;
+	min-height: 0;
+}
+.rsk-who__media img,
+.rsk-who__media video {
+	display: block;
+	width: 100%;
+	height: 100%;
+	flex: 1 1 auto;
+	object-fit: cover;
+	min-height: 0;
+}
+.rsk-who__side {
+	position: absolute;
+	left: 0;
+	top: 0;
+	bottom: 0;
+	width: 2.25rem;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: flex-end;
+	gap: 1rem;
+	padding-block: 0.75rem;
+}
+.rsk-who__rule {
+	width: 1px;
+	flex: 1 1 0;
+	min-height: 2rem;
+	background: var(--rsk-navy);
+}
+.rsk-who__label {
+	writing-mode: vertical-rl;
+	transform: rotate(180deg);
+	white-space: nowrap;
+	flex: 0 0 auto;
+	font-size: 0.7rem;
+	letter-spacing: 0.32em;
+	color: var(--rsk-navy);
+	font-weight: 600;
+	text-transform: uppercase;
+}
+
+/* Who We Are right panel — styles live in Tailwind utilities on the markup.
+   The .rsk-who__panel, .rsk-acc, .rsk-acc__toggle, and .is-active class names
+   are kept as JS hooks (see assets/js/home.js) but carry no CSS. */
+.rsk-who__panel {
+	grid-area: panel;
+	align-self: stretch;
+	min-height: 100%;
+}
+
+/* ---------- Cards ---------- */
+.rsk-cards--stack { display: grid; gap: 0.75rem; }
+.rsk-cards--row {
+	display: grid;
+	gap: var(--rsk-gap);
+	grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+.rsk-cards--4 { grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); }
+
+.rsk-card {
+	padding: 1.25rem 1.5rem;
+	border-radius: 4px;
+	background: #fff;
+	border: 1px solid var(--rsk-rule);
+}
+.rsk-card h3 {
+	margin: 0;
+	font-family: var(--rsk-serif);
+	font-weight: 500;
+	font-size: 1.15rem;
+}
+
+.rsk-card--dark {
+	background: var(--rsk-navy);
+	color: #fff;
+	border-color: transparent;
+}
+
+.rsk-card--img {
+	margin: 0;
+	overflow: hidden;
+	padding: 0;
+	border: 0;
+	background: transparent;
+}
+.rsk-card--img img {
+	width: 100%;
+	aspect-ratio: 4/3;
+	object-fit: cover;
+}
+.rsk-card--img figcaption {
+	padding: 0.75rem 0 0;
+	font-size: 0.9rem;
+	color: var(--rsk-ink-soft);
+}
+
+.rsk-card--market {
+	background: var(--rsk-blue);
+	color: #fff;
+	border-color: transparent;
+	text-align: center;
+	padding: 1.75rem 1rem;
+}
+.rsk-card--market-active {
+	background: var(--rsk-navy-deep);
+	outline: 2px solid #fff;
+	outline-offset: -6px;
+}
+
+/* ---------- What We Do ---------- */
+.rsk-what { background: #fff; }
+
+/* ---------- Product ---------- */
+/* Section rebuilt in Tailwind — no hand-rolled CSS needed. */
+
+/* ---------- 555 Initiative ---------- */
+/* Section rebuilt in Tailwind — no hand-rolled CSS needed. */
+
+/* ---------- Markets ---------- */
+.rsk-markets { background: var(--rsk-blue); color: #fff; }
+.rsk-markets .rsk-section__title { color: #fff; }
+
+/* ---------- Contact ---------- */
+.rsk-contact { background: var(--rsk-navy); color: #fff; }
+.rsk-contact__copy h2 {
+	font-family: var(--rsk-serif);
+	font-size: clamp(2rem, 4vw, 3rem);
+	margin: 0 0 0.25rem;
+}
+.rsk-contact__copy h3 {
+	font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+	margin: 0 0 1.25rem;
+	color: #c9d6ec;
+}
+.rsk-contact__copy p { max-width: 38ch; color: #d8e3f5; }
+
+.rsk-btn {
+	display: inline-block;
+	margin-top: 1.25rem;
+	padding: 0.85rem 1.6rem;
+	background: #fff;
+	color: var(--rsk-navy);
+	font-weight: 600;
+	letter-spacing: 0.04em;
+	text-transform: uppercase;
+	font-size: 0.85rem;
+	text-decoration: none;
+	border-radius: 2px;
+	transition: background 0.2s ease;
+}
+.rsk-btn:hover { background: var(--rsk-cream); }
+
+.rsk-contact__media img { border-radius: 4px; }
+
+/* ---------- Footer: white background across the whole home footer ---------- */
+.home .elementor-location-footer,
+.home .elementor-location-footer .elementor-section,
+.home .elementor-location-footer .elementor-top-section {
+	background: #fff !important;
+}
+/* Wrap the footer logo image in the Contact section's navy. */
+.home .elementor-location-footer .elementor-widget-image img {
+	background: #224378;
+	padding: 7px;
+}
+.home .elementor-location-footer,
+.home .elementor-location-footer .elementor-nav-menu a,
+.home .elementor-location-footer .elementor-item,
+.home .elementor-location-footer p,
+.home .elementor-location-footer .elementor-widget-text-editor {
+	color: #22406c !important;
+}
+.home .elementor-location-footer .elementor-item:hover,
+.home .elementor-location-footer .elementor-item:focus {
+	color: #143c82 !important;
+}
+
+/* ---------- Scroll-reveal effects ---------- */
+.rsk-reveal {
+	--rsk-reveal-delay: 0ms;
+	--rsk-reveal-duration: 900ms;
+	opacity: 0;
+	will-change: opacity, transform;
+	transition:
+		opacity var(--rsk-reveal-duration) cubic-bezier(0.22, 1, 0.36, 1) var(--rsk-reveal-delay),
+		transform var(--rsk-reveal-duration) cubic-bezier(0.22, 1, 0.36, 1) var(--rsk-reveal-delay),
+		filter var(--rsk-reveal-duration) cubic-bezier(0.22, 1, 0.36, 1) var(--rsk-reveal-delay);
+}
+
+/* Large serif heading — rise + slight blur clear, feels typographic */
+.rsk-reveal--rise {
+	transform: translate3d(0, 24px, 0);
+	filter: blur(6px);
+}
+
+/* Body copy — soft fade with tiny upward drift */
+.rsk-reveal--fade {
+	transform: translate3d(0, 12px, 0);
+}
+
+/* Full-bleed black panel — slides in from the left edge */
+.rsk-reveal--slide-left {
+	transform: translate3d(-32px, 0, 0);
+}
+
+/* Product images — rise with a hint of scale, feels tactile */
+.rsk-reveal--rise-image {
+	transform: translate3d(0, 32px, 0) scale(0.98);
+}
+
+/* Accordion cards — slide in from the right, echoing the panel edge */
+.rsk-reveal--slide-right {
+	transform: translate3d(32px, 0, 0);
+}
+
+/* Vertical rule — grows from the bottom up toward the top */
+.rsk-who__rule--reveal {
+	transform-origin: bottom center;
+	transform: scaleY(0);
+	transition: transform 900ms cubic-bezier(0.22, 1, 0.36, 1) 400ms;
+	will-change: transform;
+}
+[data-rsk-reveal].is-visible .rsk-who__rule--reveal,
+.rsk-who .rsk-reveal.is-visible ~ * .rsk-who__rule--reveal {
+	transform: scaleY(1);
+}
+/* Simpler: use the figure's own reveal state to drive the rule */
+.rsk-who__media.is-visible .rsk-who__rule--reveal {
+	transform: scaleY(1);
+}
+@media (prefers-reduced-motion: reduce) {
+	.rsk-who__rule--reveal {
+		transform: none;
+		transition: none;
+	}
+}
+
+.rsk-reveal.is-visible {
+	opacity: 1;
+	transform: none;
+	filter: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.rsk-reveal {
+		opacity: 1;
+		transform: none;
+		filter: none;
+		transition: none;
+	}
+}
+
+/* ---------- Product gallery: horizontal carousel with prev/next ---------- */
+.rsk-pgal { --rsk-pgal-gap: clamp(0.35rem, 0.6vw, 0.65rem); }
+.rsk-pgal__wrap {
+	display: grid;
+	grid-template-columns: auto minmax(0, 1fr) auto;
+	align-items: center;
+	gap: clamp(0.5rem, 1.2vw, 1.25rem);
+}
+.rsk-pgal__viewport { position: relative; overflow: hidden; }
+.rsk-pgal__track {
+	gap: var(--rsk-pgal-gap);
+	transition: transform 600ms cubic-bezier(0.22, 1, 0.36, 1);
+	will-change: transform;
+}
+/* Card width per breakpoint. Avoid nested var()/subtraction inside flex-basis
+   calc — Safari collapses those to min-content, which zeroes the card
+   because the <img> is absolutely positioned. Setting flex-basis to a plain
+   percentage (with per-breakpoint values that already account for the gaps)
+   sidesteps the bug. */
+.rsk-pgal__card {
+	flex: 0 0 auto;
+	width: calc((100% - 3 * var(--rsk-pgal-gap)) / 4); /* mobile: 4 visible */
+	min-width: 0;
+}
+@media (min-width: 480px) {
+	.rsk-pgal__card { width: calc((100% - 4 * var(--rsk-pgal-gap)) / 5); } /* 5 visible */
+}
+/* Aspect-ratio on <a> is unreliable in Safari; put the ratio on a nested
+   frame via padding-top so height is guaranteed to derive from width. */
+.rsk-pgal__card > a {
+	display: block;
+	position: relative;
+	overflow: hidden;
+	width: 100%;
+	padding-top: 75%; /* 4:3 */
+}
+.rsk-pgal__card > a > img {
+	position: absolute !important;
+	inset: 0;
+	width: 100% !important;
+	height: 100% !important;
+	max-width: none !important;
+	object-fit: cover;
+}
+.rsk-pgal__nav {
+	background: transparent;
+	border: 0;
+	padding: 0;
+	margin: 0;
+	color: rgba(255, 255, 255, 0.55);
+	cursor: pointer;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: clamp(34px, 2.6vw, 42px);
+	height: clamp(34px, 2.6vw, 42px);
+	border-radius: 9999px;
+	transition: background 200ms ease, color 200ms ease, transform 200ms ease;
+	-webkit-appearance: none;
+	appearance: none;
+	outline: none;
+	-webkit-tap-highlight-color: transparent;
+}
+.rsk-pgal__nav:focus { outline: none; }
+/* Kill any residual background/color for mouse focus (post-click sticky state) */
+.rsk-pgal__nav:focus:not(:focus-visible),
+.rsk-pgal__nav:focus:not(:focus-visible):not(:hover) {
+	background: transparent;
+	color: rgba(255, 255, 255, 0.55);
+}
+.rsk-pgal__nav:hover,
+.rsk-pgal__nav:focus-visible {
+	background: #224378;
+	color: #fff;
+}
+.rsk-pgal__nav--prev:hover { transform: translateX(-2px); }
+.rsk-pgal__nav--next:hover { transform: translateX(2px); }
+.rsk-pgal__nav:focus-visible { outline: 2px solid rgba(255, 255, 255, 0.85); outline-offset: 3px; }
+.rsk-pgal__nav svg { width: 55%; height: 55%; display: block; }
+@media (prefers-reduced-motion: reduce) {
+	.rsk-pgal__track { transition: none; }
+	.rsk-pgal__nav { transition: none; }
+}
+
+/* ---------- Zoom-follow on What-We-Do figures ---------- */
+.rsk-parallax__frame {
+	overflow: hidden;
+	border-radius: 0.5rem;
+	isolation: isolate;
+}
+.rsk-parallax__media {
+	transform: scale(1);
+	transform-origin: 50% 50%;
+	transition:
+		transform 550ms cubic-bezier(0.22, 1, 0.36, 1),
+		transform-origin 250ms ease-out;
+	will-change: transform, transform-origin;
+}
+.rsk-reveal--rise-image.is-hovering .rsk-parallax__media {
+	transform: scale(1.18);
+}
+
+/* ---------- City carousel (Markets) ---------- */
+.rsk-cities {
+	--rsk-cities-visible: 5;
+	--rsk-cities-gap: clamp(0.6rem, 1.2vw, 1.1rem);
+}
+@media (max-width: 640px) {
+	.rsk-cities { --rsk-cities-visible: 3; }
+}
+@media (min-width: 641px) and (max-width: 900px) {
+	.rsk-cities { --rsk-cities-visible: 4; }
+}
+.rsk-cities__viewport {
+	/* Only clip horizontal overflow (for the carousel sliding effect).
+	   Vertical must stay visible so the active card's transform:scale(1.06)
+	   can extend beyond the row without getting its rounded top/bottom
+	   corners chopped. Also add padding so the scale + drop shadow have
+	   room without being clipped by adjacent sections. */
+	overflow-x: hidden;
+	overflow-y: visible;
+	padding: clamp(1rem, 2vw, 1.75rem) 0;
+	margin: clamp(-1rem, -2vw, -1.75rem) 0;
+}
+.rsk-cities__track {
+	display: flex;
+	gap: var(--rsk-cities-gap);
+	will-change: transform;
+}
+.rsk-cities__card {
+	position: relative;
+	flex: 0 0 calc((100% - (var(--rsk-cities-visible) - 1) * var(--rsk-cities-gap)) / var(--rsk-cities-visible));
+	aspect-ratio: 3 / 4;
+	overflow: hidden;
+	/* City photo painted as a background — no child <img> whose size could
+	   diverge from the container. Keeps corner clipping bulletproof. */
+	background: var(--rsk-card-img) center/cover no-repeat;
+	border-radius: clamp(16px, 1.7vw, 24px);
+	cursor: pointer;
+	transform: scale(0.92);
+	transition:
+		transform 700ms cubic-bezier(0.22, 1, 0.36, 1),
+		box-shadow 700ms cubic-bezier(0.22, 1, 0.36, 1);
+	will-change: transform;
+	/* Safari drops the border-radius clip when the card (or its children)
+	   are transformed. clip-path is the reliable modern fix — it clips
+	   correctly under nested transforms where overflow:hidden alone fails. */
+	-webkit-clip-path: inset(0 round clamp(16px, 1.7vw, 24px));
+	clip-path: inset(0 round clamp(16px, 1.7vw, 24px));
+	isolation: isolate;
+}
+.rsk-cities__card.is-active {
+	transform: scale(1.06);
+	/* Tighter, less-blurred shadow so the bottom edge stays crisp and
+	   the corner arc reads as clearly as the top. */
+	box-shadow: 0 10px 24px -14px rgba(0, 0, 0, 0.55);
+	/* Slight zoom on the active card so the composition reads closer. */
+	background-size: auto 115%;
+	cursor: default;
+	z-index: 2;
+}
+/* Subtle inner ring — makes all four corners read as equally rounded
+   regardless of the underlying photo content. */
+.rsk-cities__card.is-active::after {
+	content: "";
+	position: absolute;
+	inset: 0;
+	border: 1px solid rgba(255, 255, 255, 0.4);
+	border-radius: inherit;
+	pointer-events: none;
+	z-index: 3;
+}
+.rsk-cities__overlay {
+	position: absolute;
+	inset: 0;
+	background:
+		linear-gradient(180deg, rgba(15, 58, 130, 0.75) 0%, rgba(20, 78, 160, 0.85) 100%),
+		linear-gradient(rgba(31, 78, 140, 0.35), rgba(31, 78, 140, 0.35));
+	background-blend-mode: multiply;
+	transition: opacity 700ms cubic-bezier(0.22, 1, 0.36, 1);
+	pointer-events: none;
+	z-index: 1;
+}
+.rsk-cities__card.is-active .rsk-cities__overlay {
+	opacity: 0;
+}
+.rsk-cities__label {
+	position: absolute;
+	inset: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+	padding: 0.4rem;
+	font-size: clamp(0.7rem, 1.15vw, 1.15rem);
+	line-height: 1.15;
+	letter-spacing: 0.12em;
+	font-weight: 700;
+	color: #fff;
+	text-shadow:
+		0 1px 2px rgba(0, 0, 0, 0.9),
+		0 4px 18px rgba(0, 0, 0, 0.55);
+	pointer-events: none;
+	overflow-wrap: break-word;
+	hyphens: auto;
+	z-index: 2;
+	transition: font-size 700ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+@media (min-width: 641px) {
+	.rsk-cities__label {
+		letter-spacing: 0.18em;
+	}
+}
+.rsk-cities__card.is-active .rsk-cities__label {
+	font-size: clamp(0.85rem, 1.35vw, 1.35rem);
+}
+@media (prefers-reduced-motion: reduce) {
+	.rsk-cities__card,
+	.rsk-cities__overlay,
+	.rsk-cities__label {
+		transition: none;
+		animation: none;
+	}
+}

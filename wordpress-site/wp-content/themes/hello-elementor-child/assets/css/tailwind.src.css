@@ -1,0 +1,8 @@
+/* =============================================================
+   Tailwind source — compiled to ./tailwind.css by `npm run build:css`.
+   Do not edit the compiled file; edit this one + tailwind.config.js.
+   ============================================================= */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
